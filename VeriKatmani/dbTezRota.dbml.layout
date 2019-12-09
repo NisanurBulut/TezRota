@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="dbTezRota">
+  <DataContextMoniker Name="/dbTezRotaDataContext" />
+  <nestedChildShapes>
+    <classShape Id="f7d6a59d-297f-4d20-9220-7fba7dc8bc60" isExpanded="false" absoluteBounds="0.5, 0.5, 2, 0.45">
+      <DataClassMoniker Name="/dbTezRotaDataContext/tArac" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2c0c3092-03b0-4d02-888d-59025ef88bf0" absoluteBounds="0.515, 0.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="692b4a81-0993-4cef-8d3c-3da4c50e330c" isExpanded="false" absoluteBounds="0.5, 1.125, 2, 0.45">
+      <DataClassMoniker Name="/dbTezRotaDataContext/tAracTipi" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a333bbac-05e7-4fb5-af5f-9a99b73a31bb" absoluteBounds="0.515, 1.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8c7ee701-59f6-4695-86f6-e247bf111e61" isExpanded="false" absoluteBounds="0.5, 1.75, 2, 0.45">
+      <DataClassMoniker Name="/dbTezRotaDataContext/tNokta" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bda3d12e-a84d-4675-8490-b0ea341cd3ad" absoluteBounds="0.51500000000000012, 2.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a4749291-9ffa-4ab8-bb2c-bfe60e14a026" isExpanded="false" absoluteBounds="0.5, 2.25, 2, 0.45">
+      <DataClassMoniker Name="/dbTezRotaDataContext/tOptimizasyonEmir" />
+      <nestedChildShapes>
+        <elementListCompartment Id="66fb2f3d-0503-48e0-b7cf-4cf13f6d5fe7" absoluteBounds="0.51500000000000012, 2.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="bfd6b2c2-1db4-4c5d-b736-4fc8c09fb22b" isExpanded="false" absoluteBounds="0.5, 3.25, 2, 0.45">
+      <DataClassMoniker Name="/dbTezRotaDataContext/tPlan" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2d115db3-f0d4-421d-be47-5933d0b3f92f" absoluteBounds="0.51500000000000012, 3.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e80b2aee-e32e-47af-b749-547f962cc47b" isExpanded="false" absoluteBounds="0.5, 2.75, 2, 0.45">
+      <DataClassMoniker Name="/dbTezRotaDataContext/tTasima" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8eb82f9c-acba-47a2-a9ec-c412c890b528" absoluteBounds="0.51499999999999968, 3.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
