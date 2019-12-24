@@ -22,7 +22,7 @@ namespace TezRota.VeriKatmani
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="dbTezliRota")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="dbTezRota")]
 	public partial class dbTezRotaDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -36,22 +36,28 @@ namespace TezRota.VeriKatmani
     partial void InserttAracTipi(tAracTipi instance);
     partial void UpdatetAracTipi(tAracTipi instance);
     partial void DeletetAracTipi(tAracTipi instance);
-    partial void InserttNokta(tNokta instance);
-    partial void UpdatetNokta(tNokta instance);
-    partial void DeletetNokta(tNokta instance);
-    partial void InserttOptimizasyonEmir(tOptimizasyonEmir instance);
-    partial void UpdatetOptimizasyonEmir(tOptimizasyonEmir instance);
-    partial void DeletetOptimizasyonEmir(tOptimizasyonEmir instance);
     partial void InserttPlan(tPlan instance);
     partial void UpdatetPlan(tPlan instance);
     partial void DeletetPlan(tPlan instance);
     partial void InserttTasima(tTasima instance);
     partial void UpdatetTasima(tTasima instance);
     partial void DeletetTasima(tTasima instance);
+    partial void InserttOptimizasyonSonuc(tOptimizasyonSonuc instance);
+    partial void UpdatetOptimizasyonSonuc(tOptimizasyonSonuc instance);
+    partial void DeletetOptimizasyonSonuc(tOptimizasyonSonuc instance);
+    partial void InserttOptimizasyonEmir(tOptimizasyonEmir instance);
+    partial void UpdatetOptimizasyonEmir(tOptimizasyonEmir instance);
+    partial void DeletetOptimizasyonEmir(tOptimizasyonEmir instance);
+    partial void InserttNoktaKaynak(tNoktaKaynak instance);
+    partial void UpdatetNoktaKaynak(tNoktaKaynak instance);
+    partial void DeletetNoktaKaynak(tNoktaKaynak instance);
+    partial void InserttNokta(tNokta instance);
+    partial void UpdatetNokta(tNokta instance);
+    partial void DeletetNokta(tNokta instance);
     #endregion
 		
 		public dbTezRotaDataContext() : 
-				base(global::TezRota.Properties.Settings.Default.dbTezliRotaConnectionString, mappingSource)
+				base(global::TezRota.Properties.Settings.Default.dbTezRotaConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -96,22 +102,6 @@ namespace TezRota.VeriKatmani
 			}
 		}
 		
-		public System.Data.Linq.Table<tNokta> tNoktas
-		{
-			get
-			{
-				return this.GetTable<tNokta>();
-			}
-		}
-		
-		public System.Data.Linq.Table<tOptimizasyonEmir> tOptimizasyonEmirs
-		{
-			get
-			{
-				return this.GetTable<tOptimizasyonEmir>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tPlan> tPlans
 		{
 			get
@@ -125,6 +115,38 @@ namespace TezRota.VeriKatmani
 			get
 			{
 				return this.GetTable<tTasima>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tOptimizasyonSonuc> tOptimizasyonSonucs
+		{
+			get
+			{
+				return this.GetTable<tOptimizasyonSonuc>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tOptimizasyonEmir> tOptimizasyonEmirs
+		{
+			get
+			{
+				return this.GetTable<tOptimizasyonEmir>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tNoktaKaynak> tNoktaKaynaks
+		{
+			get
+			{
+				return this.GetTable<tNoktaKaynak>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tNokta> tNoktas
+		{
+			get
+			{
+				return this.GetTable<tNokta>();
 			}
 		}
 	}
@@ -372,250 +394,6 @@ namespace TezRota.VeriKatmani
 					this._AracTuru = value;
 					this.SendPropertyChanged("AracTuru");
 					this.OnAracTuruChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tNokta")]
-	public partial class tNokta : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _nokta_isim;
-		
-		private string _kordinat;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void Onnokta_isimChanging(string value);
-    partial void Onnokta_isimChanged();
-    partial void OnkordinatChanging(string value);
-    partial void OnkordinatChanged();
-    #endregion
-		
-		public tNokta()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nokta_isim", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string nokta_isim
-		{
-			get
-			{
-				return this._nokta_isim;
-			}
-			set
-			{
-				if ((this._nokta_isim != value))
-				{
-					this.Onnokta_isimChanging(value);
-					this.SendPropertyChanging();
-					this._nokta_isim = value;
-					this.SendPropertyChanged("nokta_isim");
-					this.Onnokta_isimChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_kordinat", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string kordinat
-		{
-			get
-			{
-				return this._kordinat;
-			}
-			set
-			{
-				if ((this._kordinat != value))
-				{
-					this.OnkordinatChanging(value);
-					this.SendPropertyChanging();
-					this._kordinat = value;
-					this.SendPropertyChanged("kordinat");
-					this.OnkordinatChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tOptimizasyonEmir")]
-	public partial class tOptimizasyonEmir : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _PlanId;
-		
-		private System.DateTime _EmirZamani;
-		
-		private string _Skor;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnPlanIdChanging(int value);
-    partial void OnPlanIdChanged();
-    partial void OnEmirZamaniChanging(System.DateTime value);
-    partial void OnEmirZamaniChanged();
-    partial void OnSkorChanging(string value);
-    partial void OnSkorChanged();
-    #endregion
-		
-		public tOptimizasyonEmir()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PlanId", DbType="Int NOT NULL")]
-		public int PlanId
-		{
-			get
-			{
-				return this._PlanId;
-			}
-			set
-			{
-				if ((this._PlanId != value))
-				{
-					this.OnPlanIdChanging(value);
-					this.SendPropertyChanging();
-					this._PlanId = value;
-					this.SendPropertyChanged("PlanId");
-					this.OnPlanIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmirZamani", DbType="DateTime NOT NULL")]
-		public System.DateTime EmirZamani
-		{
-			get
-			{
-				return this._EmirZamani;
-			}
-			set
-			{
-				if ((this._EmirZamani != value))
-				{
-					this.OnEmirZamaniChanging(value);
-					this.SendPropertyChanging();
-					this._EmirZamani = value;
-					this.SendPropertyChanged("EmirZamani");
-					this.OnEmirZamaniChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Skor", DbType="NVarChar(MAX)")]
-		public string Skor
-		{
-			get
-			{
-				return this._Skor;
-			}
-			set
-			{
-				if ((this._Skor != value))
-				{
-					this.OnSkorChanging(value);
-					this.SendPropertyChanging();
-					this._Skor = value;
-					this.SendPropertyChanged("Skor");
-					this.OnSkorChanged();
 				}
 			}
 		}
@@ -908,6 +686,686 @@ namespace TezRota.VeriKatmani
 					this._HedefId = value;
 					this.SendPropertyChanged("HedefId");
 					this.OnHedefIdChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tOptimizasyonSonuc")]
+	public partial class tOptimizasyonSonuc : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _EmirId;
+		
+		private int _TasimaId;
+		
+		private int _KaynakId;
+		
+		private int _HedefId;
+		
+		private string _NakliyeNo;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnEmirIdChanging(int value);
+    partial void OnEmirIdChanged();
+    partial void OnTasimaIdChanging(int value);
+    partial void OnTasimaIdChanged();
+    partial void OnKaynakIdChanging(int value);
+    partial void OnKaynakIdChanged();
+    partial void OnHedefIdChanging(int value);
+    partial void OnHedefIdChanged();
+    partial void OnNakliyeNoChanging(string value);
+    partial void OnNakliyeNoChanged();
+    #endregion
+		
+		public tOptimizasyonSonuc()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmirId", DbType="Int NOT NULL")]
+		public int EmirId
+		{
+			get
+			{
+				return this._EmirId;
+			}
+			set
+			{
+				if ((this._EmirId != value))
+				{
+					this.OnEmirIdChanging(value);
+					this.SendPropertyChanging();
+					this._EmirId = value;
+					this.SendPropertyChanged("EmirId");
+					this.OnEmirIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TasimaId", DbType="Int NOT NULL")]
+		public int TasimaId
+		{
+			get
+			{
+				return this._TasimaId;
+			}
+			set
+			{
+				if ((this._TasimaId != value))
+				{
+					this.OnTasimaIdChanging(value);
+					this.SendPropertyChanging();
+					this._TasimaId = value;
+					this.SendPropertyChanged("TasimaId");
+					this.OnTasimaIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KaynakId", DbType="Int NOT NULL")]
+		public int KaynakId
+		{
+			get
+			{
+				return this._KaynakId;
+			}
+			set
+			{
+				if ((this._KaynakId != value))
+				{
+					this.OnKaynakIdChanging(value);
+					this.SendPropertyChanging();
+					this._KaynakId = value;
+					this.SendPropertyChanged("KaynakId");
+					this.OnKaynakIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HedefId", DbType="Int NOT NULL")]
+		public int HedefId
+		{
+			get
+			{
+				return this._HedefId;
+			}
+			set
+			{
+				if ((this._HedefId != value))
+				{
+					this.OnHedefIdChanging(value);
+					this.SendPropertyChanging();
+					this._HedefId = value;
+					this.SendPropertyChanged("HedefId");
+					this.OnHedefIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NakliyeNo", DbType="NVarChar(50)")]
+		public string NakliyeNo
+		{
+			get
+			{
+				return this._NakliyeNo;
+			}
+			set
+			{
+				if ((this._NakliyeNo != value))
+				{
+					this.OnNakliyeNoChanging(value);
+					this.SendPropertyChanging();
+					this._NakliyeNo = value;
+					this.SendPropertyChanged("NakliyeNo");
+					this.OnNakliyeNoChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tOptimizasyonEmir")]
+	public partial class tOptimizasyonEmir : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _PlanId;
+		
+		private System.DateTime _EmirZamani;
+		
+		private string _BaslangicSkor;
+		
+		private System.Nullable<double> _Sicaklik;
+		
+		private System.Nullable<int> _Dongu;
+		
+		private System.Nullable<double> _SicaklikAzaltmaOrani;
+		
+		private string _SonucSkor;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnPlanIdChanging(int value);
+    partial void OnPlanIdChanged();
+    partial void OnEmirZamaniChanging(System.DateTime value);
+    partial void OnEmirZamaniChanged();
+    partial void OnBaslangicSkorChanging(string value);
+    partial void OnBaslangicSkorChanged();
+    partial void OnSicaklikChanging(System.Nullable<double> value);
+    partial void OnSicaklikChanged();
+    partial void OnDonguChanging(System.Nullable<int> value);
+    partial void OnDonguChanged();
+    partial void OnSicaklikAzaltmaOraniChanging(System.Nullable<double> value);
+    partial void OnSicaklikAzaltmaOraniChanged();
+    partial void OnSonucSkorChanging(string value);
+    partial void OnSonucSkorChanged();
+    #endregion
+		
+		public tOptimizasyonEmir()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PlanId", DbType="Int NOT NULL")]
+		public int PlanId
+		{
+			get
+			{
+				return this._PlanId;
+			}
+			set
+			{
+				if ((this._PlanId != value))
+				{
+					this.OnPlanIdChanging(value);
+					this.SendPropertyChanging();
+					this._PlanId = value;
+					this.SendPropertyChanged("PlanId");
+					this.OnPlanIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmirZamani", DbType="DateTime NOT NULL")]
+		public System.DateTime EmirZamani
+		{
+			get
+			{
+				return this._EmirZamani;
+			}
+			set
+			{
+				if ((this._EmirZamani != value))
+				{
+					this.OnEmirZamaniChanging(value);
+					this.SendPropertyChanging();
+					this._EmirZamani = value;
+					this.SendPropertyChanged("EmirZamani");
+					this.OnEmirZamaniChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BaslangicSkor", DbType="NVarChar(MAX)")]
+		public string BaslangicSkor
+		{
+			get
+			{
+				return this._BaslangicSkor;
+			}
+			set
+			{
+				if ((this._BaslangicSkor != value))
+				{
+					this.OnBaslangicSkorChanging(value);
+					this.SendPropertyChanging();
+					this._BaslangicSkor = value;
+					this.SendPropertyChanged("BaslangicSkor");
+					this.OnBaslangicSkorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sicaklik", DbType="Float")]
+		public System.Nullable<double> Sicaklik
+		{
+			get
+			{
+				return this._Sicaklik;
+			}
+			set
+			{
+				if ((this._Sicaklik != value))
+				{
+					this.OnSicaklikChanging(value);
+					this.SendPropertyChanging();
+					this._Sicaklik = value;
+					this.SendPropertyChanged("Sicaklik");
+					this.OnSicaklikChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dongu", DbType="Int")]
+		public System.Nullable<int> Dongu
+		{
+			get
+			{
+				return this._Dongu;
+			}
+			set
+			{
+				if ((this._Dongu != value))
+				{
+					this.OnDonguChanging(value);
+					this.SendPropertyChanging();
+					this._Dongu = value;
+					this.SendPropertyChanged("Dongu");
+					this.OnDonguChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SicaklikAzaltmaOrani", DbType="Float")]
+		public System.Nullable<double> SicaklikAzaltmaOrani
+		{
+			get
+			{
+				return this._SicaklikAzaltmaOrani;
+			}
+			set
+			{
+				if ((this._SicaklikAzaltmaOrani != value))
+				{
+					this.OnSicaklikAzaltmaOraniChanging(value);
+					this.SendPropertyChanging();
+					this._SicaklikAzaltmaOrani = value;
+					this.SendPropertyChanged("SicaklikAzaltmaOrani");
+					this.OnSicaklikAzaltmaOraniChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SonucSkor", DbType="NVarChar(MAX)")]
+		public string SonucSkor
+		{
+			get
+			{
+				return this._SonucSkor;
+			}
+			set
+			{
+				if ((this._SonucSkor != value))
+				{
+					this.OnSonucSkorChanging(value);
+					this.SendPropertyChanging();
+					this._SonucSkor = value;
+					this.SendPropertyChanged("SonucSkor");
+					this.OnSonucSkorChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tNoktaKaynak")]
+	public partial class tNoktaKaynak : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _NoktaAdi;
+		
+		private string _Kodu1;
+		
+		private string _Kodu2;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNoktaAdiChanging(string value);
+    partial void OnNoktaAdiChanged();
+    partial void OnKodu1Changing(string value);
+    partial void OnKodu1Changed();
+    partial void OnKodu2Changing(string value);
+    partial void OnKodu2Changed();
+    #endregion
+		
+		public tNoktaKaynak()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoktaAdi", DbType="NVarChar(MAX)")]
+		public string NoktaAdi
+		{
+			get
+			{
+				return this._NoktaAdi;
+			}
+			set
+			{
+				if ((this._NoktaAdi != value))
+				{
+					this.OnNoktaAdiChanging(value);
+					this.SendPropertyChanging();
+					this._NoktaAdi = value;
+					this.SendPropertyChanged("NoktaAdi");
+					this.OnNoktaAdiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Kodu1", DbType="NVarChar(MAX)")]
+		public string Kodu1
+		{
+			get
+			{
+				return this._Kodu1;
+			}
+			set
+			{
+				if ((this._Kodu1 != value))
+				{
+					this.OnKodu1Changing(value);
+					this.SendPropertyChanging();
+					this._Kodu1 = value;
+					this.SendPropertyChanged("Kodu1");
+					this.OnKodu1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Kodu2", DbType="NVarChar(MAX)")]
+		public string Kodu2
+		{
+			get
+			{
+				return this._Kodu2;
+			}
+			set
+			{
+				if ((this._Kodu2 != value))
+				{
+					this.OnKodu2Changing(value);
+					this.SendPropertyChanging();
+					this._Kodu2 = value;
+					this.SendPropertyChanged("Kodu2");
+					this.OnKodu2Changed();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tNokta")]
+	public partial class tNokta : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _nokta_isim;
+		
+		private string _kordinat;
+		
+		private string _musteriKodu;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void Onnokta_isimChanging(string value);
+    partial void Onnokta_isimChanged();
+    partial void OnkordinatChanging(string value);
+    partial void OnkordinatChanged();
+    partial void OnmusteriKoduChanging(string value);
+    partial void OnmusteriKoduChanged();
+    #endregion
+		
+		public tNokta()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nokta_isim", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string nokta_isim
+		{
+			get
+			{
+				return this._nokta_isim;
+			}
+			set
+			{
+				if ((this._nokta_isim != value))
+				{
+					this.Onnokta_isimChanging(value);
+					this.SendPropertyChanging();
+					this._nokta_isim = value;
+					this.SendPropertyChanged("nokta_isim");
+					this.Onnokta_isimChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_kordinat", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string kordinat
+		{
+			get
+			{
+				return this._kordinat;
+			}
+			set
+			{
+				if ((this._kordinat != value))
+				{
+					this.OnkordinatChanging(value);
+					this.SendPropertyChanging();
+					this._kordinat = value;
+					this.SendPropertyChanged("kordinat");
+					this.OnkordinatChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_musteriKodu", DbType="NVarChar(MAX)")]
+		public string musteriKodu
+		{
+			get
+			{
+				return this._musteriKodu;
+			}
+			set
+			{
+				if ((this._musteriKodu != value))
+				{
+					this.OnmusteriKoduChanging(value);
+					this.SendPropertyChanging();
+					this._musteriKodu = value;
+					this.SendPropertyChanged("musteriKodu");
+					this.OnmusteriKoduChanged();
 				}
 			}
 		}
