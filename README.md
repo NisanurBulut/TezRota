@@ -117,13 +117,13 @@ konumlandırılmıştır.
 
 Her noktanın konum bilgisi ondalıklı sayılar olarak, 15.6 inc’lik bir bilgisayarın ekran boyutları göz önüne alınarak statik olarak verilmiştir. Ancak nokta tanımlaması yapılırken yalnızca koordinat bilgisi kayıt altına alınmamıştır. Her nokta için aşağıda belirtilen değerler tanımlanmıştır.
 
-a) İsim
+- İsim
 
-b) Öznitelik numarası
+- Öznitelik numarası
 
-c) Koordinat bilgisi
+- Koordinat bilgisi
 
-d) Geçiş yapabileceği noktalar kümesi bilgileri tutulur.
+- Geçiş yapabileceği noktalar kümesi bilgileri tutulur.
 
 Geçiş yapılabilecek noktalar kümesinin çözüm süresi boyunca noktanın yanında taşınmasının sebebi,
 programlama açısından okuma yazma işleminin çok maliyetli olması sebebiyledir. Her noktanın koordinat değerleri bir kez okunur ve hafızada tutulur.
@@ -227,22 +227,22 @@ işlemleri aşağıdaki gibi sıralanmıştır.
 
 a) Her iki sezgisel araştırma yöntemi için ortak olan fonksiyonlar statik sınıflarda
 tanımlanmışlardır. Örneğin, çözüm süresi her iki yöntem için kullanıcıya belli bir formatta
-sunulmuştur. Bu formatın tanımlamasının yapıldığı method statik olarak tanımlanmıştır.
+sunulmuştur. Bu formatın tanımlamasının yapıldığı method statik olarak tanımlanmıştır. </br>
 
 b) Bir noktanın diğer noktalara olan geçiş matris bilgisinin her hesaplama işleminde okunması
-tercih edilmemiştir yalnızca bir kez okuma işlemi yapılmıştır.
+tercih edilmemiştir yalnızca bir kez okuma işlemi yapılmıştır.</br>
 
 c) Her iki sezgisel araştırma yöntemi aynı problemin noktalarından bir rota hazırlamaya çalıştığı
-için, problemin oluşturulduğu bölüm statik sınıf içerisinde tanımlanmıştır.
+için, problemin oluşturulduğu bölüm statik sınıf içerisinde tanımlanmıştır.</br>
 
 d) Kullanıcının bulunan rotayı doğru şekilde anlayabilmesi için, noktalar arası geçişler oklarla
-gösterilmiştir. Bu şekilde bir string format hazırlanmış ve kullanıcıya sunulmuştur.
+gösterilmiştir. Bu şekilde bir string format hazırlanmış ve kullanıcıya sunulmuştur.</br>
 
 e) Rotanın kullanıcı tarafında net gözlemlenebilmesi için, noktalar arasındaki mesafeye sadık
-kalarak, küçültme ölçeklemesiyle rota çizilerek gösterim yapılmıştır.
+kalarak, küçültme ölçeklemesiyle rota çizilerek gösterim yapılmıştır.</br>
 
 f) Sürdürülebilirlik açısından esnektir. Çözüm için kullanılan noktalar kümesi artırılabilir ya da
-azaltılabililir.
+azaltılabililir.</br>
 
 ### Program Kısıtları
 Programın geliştirme aşamasında akla ön görülemeyen, çözüm sürecinin kontrolü ve çözüm kalitesini
