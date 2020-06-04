@@ -286,7 +286,7 @@ başlansın yine aynı noktaya varılacağı için çember etkisi vardır ve top
 etmeyecektir. Bu sebeple birden fazla aynı sonuca sahip çözümler olduğu söylenebilir. Dolayısıyla aşağıda
 verilen çözüm görseli, 3690,06 mesafe değerine sahip çözümlerden herhangi biridir denilebilir.
 
-![](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran16.png)
+![Resim-İdeal Çözüm Örneği](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran16.png)
 
 - Çözüm Sonuç:3690,06 km
 - Rota:R => J => D => O => C => M => F => H => P => N => T => S => A => U => I => E => B
