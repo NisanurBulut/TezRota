@@ -140,3 +140,157 @@ c) Yasaklı arama yaklaşımında her iterasyonda komşuluk sayısı parametresi
 d) Aslında her bir kromozom linked list yapıdadır. Kromozomu oluşturan noktalar rota sıralı tanımlandığı gibi fiziksel hafızada sıralı şekillerde tutulurlar. Bu yöntem programlama açısından fayda sağlamıştır.
 
 e) Her komşuluk bilgisi rota ve mesafe maliyeti bilgisini taşır.
+
+![Resim-Kromozom Yapısı](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran5.png)
+Yasaklı arama yönteminde komşuluk kümesi kullanılmıştır. Bu küme kromozomlardan oluşmaktadır.
+Kromozomlar üzerinde rastgele takas işlemi yapılarak komşulukların üretilmesi sağlanır. Komşuluk yapısı list
+veri yapısı şeklindedir. Bu yapıyı düz bir liste yapmak gibi düşünebiliriz. Ancak komşuluk kümesinde hesaplama
+işlemi yaparken rastgele bir yaklaşım değil sıralı bir seçim işlemi yapılmıştır. Komşuluk kümesinde bulunan
+kromozomların mesafe maliyeti, kümede bulunduğu sıraya göre hesaplama işlemine tabi olmuştur.
+
+### Başlangıç Çözümünün Oluşturulması
+Toplam mesafesi hesaplanmak istenen noktaların belirlenmesinin ardından başlangıç çözümünün oluşturulması
+aşamasına geçilir. Hesaplanmak istenen bütün noktalar bir torbaya atılmış gibi düşünülür ve torbadan rastgele
+olarak sırasıyla seçim yaparak kromozom yapısına nokta eklemesi yapılır
+
+![Resim-Başlangıç çözüm oluşturma işlem](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran6.png)
+
+### Rotanın Mesafe Maliyetinin Hesaplanması
+
+Her iki çözüm yöntemi için ortak olan aşama, oluşturulan rotanın mesafe maliyetinin hesaplanması
+işlemidir. Rotayı oluşturan nokta tanımları xy koordinat düzlemin esas alınarak modellenmiştir. Bu
+sebeple öklit formülü kullanılarak iki nokta arasındaki mesafe hesaplanmıştır. Sonrasında rota içinde
+bulunan tüm mesafeler toplanarak, toplam mesafe maliyeti elde edilmiştir.
+- Öklit formülünün proje içerisinde C# programlama dili kullanılarak uygulanması
+
+![Resim-Başlangıç çözüm oluşturma işlem](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran7.png)
+
+### Yasaklı Hareketin Kontrolü
+
+Yasaklı arama algoritmasının çalışma mekanizmasında esas amaç bazı hareketlerin tekrarlanmasını
+önlemektir. Tabu listesinin boyutu aşıldığı durumda FIFO kuralı uygulanır. Tabu listesine giren ilk
+hareket tabu listesinden çıkarılır ve yasaklı olmaktan kurtulur.
+Programlama aşamasında fark edilmiştir ki A noktasının B noktasıyla yer değiştirmesi demek aynı
+zamanda B noktasının A noktasıyla yer değiştirmesi anlamına gelmektedir. Bu sebeple yalnızca A-B
+yer değiştirmesi durumu değil aynı anda B-A yer değiştirmesi olayıda kontrol edilmiştir
+
+![Resim-Tabu hareket kontrolü](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran8.png)
+
+- Tabu hareket kontrolünün C# programlama dili kullanılarak kontrol edilmesi
+![](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran9.png)
+
+### Programın Çalışma Adımları
+
+Programın çalışması sıralı işlemlerin uygulanması şeklinde tanımlanmıştır. Kullancıının müdahalesi
+yanızca sezgisel yöntemin seçilmesi ve seçim yapılan bu yönteme ilişkin parametre ayarlarının
+yapıldığı kısımdır. Kullanıcı parametre ayarını yapmasa dahi seçilen araştırma yöntemi varsayılan
+parametrelerle çalışacaktır.
+Programın çalışma adımları sırasıyla aşağıdaki gibidir.
+
+a) Program içerisinde hard-code olarak tanımlı 20 nokta kullanılarak problem denen noktalar
+kümesi tanımlanır. Bu tanımlama noktaların isim, numara ve koordinat bilgilerinin belirtilen
+CityPoint sınıfı içerisinde kurallı şekilde yazılması işlemidir.
+
+![Resim-CityPoint sınıfının tanımlama bilgisi](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran10.png)
+
+Nokta bilgilerinin nesnelerle temsil edilmesinin ardından, rastgele olarak başlangıç çözümü
+oluşturulur.
+
+c) Oluşturulan başlangıç çözümü kullanıcıya grafiksel arayüzle ve string sıralı gösterimiyle
+sunulur.
+d) Kullanıcı, arayüz aracılığıyla parametre değişimi yapmaz ise seçim yaptığı sezgisel yöntem,
+program içerisinde yine hard-code olarak tanımlanmış olan varsayılan değerlerle çözüm arama
+sürecini başlatılır. Parametreleri değiştirmesinin ardından yine bir sezgisel arama yöntemi
+seçerek, kullanıcı çözüm arama sürecini başlatır.
+e) Çözüm arama sürecinin tamamlanmasının ardından, bulunan iyileştirilmiş rota kullanıcıya
+grafiksel arayüzle ve string sıralı gösterimle sunulur. Ayrıca kullanıcıya çözüm süresinin ne
+kadar olduğu ile ilgili anlaşılır formatta bilgilendirme yapılır.
+
+![Resim-Sezgisel yöntemlerden biriyle çözüm arama süreci başlatılmadan önce](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran11.png)
+
+![Resim-Sezgisel yöntemlerden biriyle çözüm arama süreci başlatılmadan sonra](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran12.png)
+
+### Programın Çalışma Performansını Artıran İşlemler
+Programın, nokta tanımlaması, rota belirlenmesi ve kabul edilebilir bir rota düzenlemesinin
+gerçekleştirimi yaparken çalışma süresinin katlanılabilir olması gerekmektedir. Ayrıca bulunan
+çözümün kullanıcıya anlaşılır şekilde sunulması da önemli bir durumdur. Bu amaçlar için yapılan
+işlemleri aşağıdaki gibi sıralanmıştır.
+
+a) Her iki sezgisel araştırma yöntemi için ortak olan fonksiyonlar statik sınıflarda
+tanımlanmışlardır. Örneğin, çözüm süresi her iki yöntem için kullanıcıya belli bir formatta
+sunulmuştur. Bu formatın tanımlamasının yapıldığı method statik olarak tanımlanmıştır.
+b) Bir noktanın diğer noktalara olan geçiş matris bilgisinin her hesaplama işleminde okunması
+tercih edilmemiştir yalnızca bir kez okuma işlemi yapılmıştır.
+c) Her iki sezgisel araştırma yöntemi aynı problemin noktalarından bir rota hazırlamaya çalıştığı
+için, problemin oluşturulduğu bölüm statik sınıf içerisinde tanımlanmıştır.
+d) Kullanıcının bulunan rotayı doğru şekilde anlayabilmesi için, noktalar arası geçişler oklarla
+gösterilmiştir. Bu şekilde bir string format hazırlanmış ve kullanıcıya sunulmuştur.
+e) Rotanın kullanıcı tarafında net gözlemlenebilmesi için, noktalar arasındaki mesafeye sadık
+kalarak, küçültme ölçeklemesiyle rota çizilerek gösterim yapılmıştır,
+f) Sürdürülebilirlik açısından esnektir. Çözüm için kullanılan noktalar kümesi artırılabilir ya da
+azaltılabililir.
+
+### Program Kısıtları
+Programın geliştirme aşamasında akla ön görülemeyen, çözüm sürecinin kontrolü ve çözüm kalitesini
+artırmaya yönelik bazı durumlar oluşmuştur. Bunlar aşağıda sıralanmıştır.
+a) Her bir komşuluk rotası ve komşuluğun mesafe maliyeti, kullanılan sezgisel yöntem ile bu
+yönteme ait parametrelerle kaydının tutulması yapılmamıştır. Örneğin tavlama method için bu
+yöntem uygulanabilseydi, sıcaklık düşüşüne bağlı olarak çözüm kalitesi gözlemlenebilirdi.
+b) Başlangıç çözümünün ardından yapılan iyileştirilmiş çözüm, ikinci isteğe başlangıç çözümü
+verilerek araştırma verilebilmesi(daha önce bahsedilen merdiven etkisi) yalnızca tavlama
+benzetimi için kodlanabilmiştir.
+c) Her çözüm isteği, çözüm isteğinin hangi yöntem ve parametrelerle yapılmak istendiği, elde
+edilen sonuç ve çözüm süresi gibi bilgiler kaydedilmemiştir. Dolayısıyla kıyaslama işlemi
+program çalışırken kullanıcının gözlem yeteneğine bırakılmıştır.
+
+### Programın Uygulama Sonuçları
+Programın amacı verilen 20 adet noktanın, toplamda en kısa mesafeyi bulacak şekilde rotalanmasıdır.
+Bu işlemi yaparken en hızlı şekilde yapması hedeflenmiştir. Bu sebeple de iki sezgisel arama
+yaklaşımının kıyaslanması yoluna gitmiştir. Sonuçlar değerlendirilirken adaletli bir kıyaslama
+yapılmaya gayret edilmiştir. Her iki yaklaşım için aşağıda belirtilen durumlar göz önüne alınarak
+sonuçlar değerlendirilmiştir.
+a) Kontrol edilen komşuluk sayısının her iki sezgisel yaklaşım içinde aynı olmasına gayret edilmiştir.
+b) İterasyon değeri 1000 sayısıyla başlanmış önce 1000’er 1000’er artırılmış ardından 10000’er
+10000’er artırım yoluna gidilmiştir.
+c) Yasaklı arama yönteminde tabu listesi boyutu 3 olarak başlatılmış sırasıyla 7 ve 9 değerleri
+denenmiştir.
+d) Tavlama benzetimi için sıcaklık 100 olarak belirlenmiş bunun dışında bir değer için kontrol
+yapılmamıştır.
+e) Yasaklı arama yönteminde komşuluk değeri 12 olarak belirlenmiş ve bunun dışında bir değer için
+kontrol yapılmamıştır.
+
+![](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran13.png)
+
+![](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran14.png)
+
+![](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran15.png)
+
+- Bulunan sonuçlar değerlendirildiğinde, her iki yönteminde başlangıç çözümü üzerinde iyileştirme
+yaptığı gözle görülür şekilde ortadadır.
+- Yöntemler kendi arasında kıyaslanacak olursa, tavlama benzetiminin yasaklı arama yöntemine göre
+daha iyi sonuçlar verdiği gözlemlenmiştir.
+
+### İdeal Çözüm Gösterimi
+
+Program çalıştırılarak pek çok sonuç elde edilmiştir. Elde edilen sonuçlar içerisinde en kısa mesafe
+uzunluğu 3690,06 km bulunmuştur. Ancak bu sonucun en iyi sonuç olduğu halan bilinmemektedir. Pek çok
+kez daha durumun test edilmesi gerekmektedir. Ancak bu değerden daha iyi bir sonuç elde edilemediği gibi,
+başlangıç çözümlerine göre en az %50 oranda iyileşme olan bir sonuçtur.
+Rotanın başlangıç noktasının hangi nokta olduğunun bir önemi yoktur. Çünkü hangi noktadan başlanırsa
+başlansın yine aynı noktaya varılacağı için çember etkisi vardır ve toplam mesafe uzunluğu fark
+etmeyecektir. Bu sebeple birden fazla aynı sonuca sahip çözümler olduğu söylenebilir. Dolayısıyla aşağıda
+verilen çözüm görseli, 3690,06 mesafe değerine sahip çözümlerden herhangi biridir denilebilir.
+
+![](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran16.png)
+
+- Çözüm Sonuç:3690,06 km
+- Rota:R => J => D => O => C => M => F => H => P => N => T => S => A => U => I => E => B
+=> G => L => K => R
+
+### Proje Geliştirme Sürecini Gösteren TFS Adresi
+
+Projenin geliştirme aşaması başlangıçtan bitimine kadar TFS üzerinden kontrol edilmiştir.
+Link : https://nisanurb.visualstudio.com/TSP/_git/TSP
+
+# Kaynakça
+1. http://web.firat.edu.tr/iaydin/bmu579/bmu_579_bolum7.pdf
