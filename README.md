@@ -52,6 +52,7 @@ Tavlama, malzemeyi belirli bir süre (tavlama sıcaklığına kadar) ısıttıkt
 soğutmaktır. Tavlama malzemeyi rahatlatmak, yumuşatmak ve iç yapıyı daha kullanılabilir hale
 getirmek için yapılan ısıl işlemlerin geneline verilen addır.Tavlama Benzetimi, İniş Algoritmasının
 (Descent Algorithm) iyileştirilmiş halidir.
+
 #### İniş Algoritması
 - Rasgele seçilen bir çözüm ile aramaya başlanır.
 - Komşu çözüm oluşturulur ve amaç fonksiyonundaki değişim hesaplanır.
@@ -112,8 +113,7 @@ Uygulama rotalama işlemini yapabilmek için temelde nokta tanımlamasına ihtiy
 tanımlamasında düzlem, x y koordinat sistemi şeklinde modellenmiştir ve noktalar bu düzlemde
 konumlandırılmıştır.
 Her noktanın konum bilgisi ondalıklı sayılar olarak, 15.6 inc’lik bir bilgisayarın ekran boyutları göz önüne
-alınarak statik olarak verilmiştir. Ancak nokta tanımlaması yapılırken yalnızca koordinat bilgisi kayıt altına
-alınmamıştır. Her nokta için aşağıda belirtilen değerler tanımlanmıştır.
+alınarak statik olarak verilmiştir. Ancak nokta tanımlaması yapılırken yalnızca koordinat bilgisi kayıt altına alınmamıştır. Her nokta için aşağıda belirtilen değerler tanımlanmıştır.
 
 a) İsim
 b) Öznitelik numarası
@@ -172,7 +172,7 @@ Yasaklı arama algoritmasının çalışma mekanizmasında esas amaç bazı hare
 hareket tabu listesinden çıkarılır ve yasaklı olmaktan kurtulur.
 Programlama aşamasında fark edilmiştir ki A noktasının B noktasıyla yer değiştirmesi demek aynı
 zamanda B noktasının A noktasıyla yer değiştirmesi anlamına gelmektedir. Bu sebeple yalnızca A-B
-yer değiştirmesi durumu değil aynı anda B-A yer değiştirmesi olayıda kontrol edilmiştir
+yer değiştirmesi durumu değil aynı anda B-A yer değiştirmesi olayıda kontrol edilmiştir.
 
 ![Resim-Tabu hareket kontrolü](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran8.png)
 
@@ -249,13 +249,18 @@ Bu işlemi yaparken en hızlı şekilde yapması hedeflenmiştir. Bu sebeple de 
 yaklaşımının kıyaslanması yoluna gitmiştir. Sonuçlar değerlendirilirken adaletli bir kıyaslama
 yapılmaya gayret edilmiştir. Her iki yaklaşım için aşağıda belirtilen durumlar göz önüne alınarak
 sonuçlar değerlendirilmiştir.
+
 a) Kontrol edilen komşuluk sayısının her iki sezgisel yaklaşım içinde aynı olmasına gayret edilmiştir.
+
 b) İterasyon değeri 1000 sayısıyla başlanmış önce 1000’er 1000’er artırılmış ardından 10000’er
 10000’er artırım yoluna gidilmiştir.
+
 c) Yasaklı arama yönteminde tabu listesi boyutu 3 olarak başlatılmış sırasıyla 7 ve 9 değerleri
 denenmiştir.
+
 d) Tavlama benzetimi için sıcaklık 100 olarak belirlenmiş bunun dışında bir değer için kontrol
 yapılmamıştır.
+
 e) Yasaklı arama yönteminde komşuluk değeri 12 olarak belirlenmiş ve bunun dışında bir değer için
 kontrol yapılmamıştır.
 
