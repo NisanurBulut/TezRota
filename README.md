@@ -26,3 +26,5 @@ Ekranın sol üst köşesinde zaman bilgisi gösterimi yapılmıştır. Oluştur
 göre kullanıcıdan alınan hız değeriyle, rotanın ne kadar sürede tamamlanacağı kullanıcıya sunulmuştur.
 rotalama işleminin çözüm süresi ve rotanın sıralı dizilimi ekranda gösterilmektedir. Çözüm süresi,
 yalnızca algoritmanın çözüm süresini ifade etmektir.
+
+![Resim-Arayüz gösterimi](https://github.com/NisanurBulut/TezRota/tree/master/Photos/anaEkran1.png)
