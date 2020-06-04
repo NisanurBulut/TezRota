@@ -142,6 +142,7 @@ d) Aslında her bir kromozom linked list yapıdadır. Kromozomu oluşturan nokta
 e) Her komşuluk bilgisi rota ve mesafe maliyeti bilgisini taşır.
 
 ![Resim-Kromozom Yapısı](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran5.png)
+
 Yasaklı arama yönteminde komşuluk kümesi kullanılmıştır. Bu küme kromozomlardan oluşmaktadır.
 Kromozomlar üzerinde rastgele takas işlemi yapılarak komşulukların üretilmesi sağlanır. Komşuluk yapısı list
 veri yapısı şeklindedir. Bu yapıyı düz bir liste yapmak gibi düşünebiliriz. Ancak komşuluk kümesinde hesaplama
