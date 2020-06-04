@@ -103,21 +103,26 @@ benzetimi yöntemiyle çözüm araştırma isteği verirse uygulamaya, uygulama 
 Her isteğin ardından üretilen çözümde oranına dikkat edilmeksizin iyiye gitme olduğu göz önüne alınırsa,
 tavlama benzetimi kullanılarak yapılan ard arda isteklerin merdiven etkisiyle daha da iyi sonuçlara gideceği
 söylenebilir.
+
 Yasaklı arama yönteminde, başlangıç çözümü her çözüm isteği alındığında rastgele olarak yeniden
 oluşturulmuştur bu sebeple yukarıda bahsi geçem merdiven etkisini yasaklı arama yöntemi kullanılan
 isteklerin çözüm sonuçlarında görmek mümkün değildir.
+
 Yasaklı arama yöntemi kullanırken dikkat edilen en önemli nokta tabu listesinin uzunluğudur. Rotalama için kullanılan nokta sayısı varsayılan olarak 20 adettir ancak bu boyut artırılabilir ya da azaltılabilir. Bu sebeple 4 adet nokta için 5 adet tabu liste boyutu vermek doğru bir yaklaşım değildir. Belli bir çözüm süresinden ya da iterasyon sayısından sonra uygulamanın ısrarla aynı sonucu en iyi çözüm kabul etmesi durumu göz önünde bulundurularak, 10 000 iterasyonda bir tabu listesinden bir eleman çıkarılmıştır.
 
 ## Nokta Tanımlaması
 Uygulama rotalama işlemini yapabilmek için temelde nokta tanımlamasına ihtiyaç duyar. Nokta
 tanımlamasında düzlem, x y koordinat sistemi şeklinde modellenmiştir ve noktalar bu düzlemde
 konumlandırılmıştır.
-Her noktanın konum bilgisi ondalıklı sayılar olarak, 15.6 inc’lik bir bilgisayarın ekran boyutları göz önüne
-alınarak statik olarak verilmiştir. Ancak nokta tanımlaması yapılırken yalnızca koordinat bilgisi kayıt altına alınmamıştır. Her nokta için aşağıda belirtilen değerler tanımlanmıştır.
+
+Her noktanın konum bilgisi ondalıklı sayılar olarak, 15.6 inc’lik bir bilgisayarın ekran boyutları göz önüne alınarak statik olarak verilmiştir. Ancak nokta tanımlaması yapılırken yalnızca koordinat bilgisi kayıt altına alınmamıştır. Her nokta için aşağıda belirtilen değerler tanımlanmıştır.
 
 a) İsim
+
 b) Öznitelik numarası
+
 c) Koordinat bilgisi
+
 d) Geçiş yapabileceği noktalar kümesi bilgileri tutulur.
 
 Geçiş yapılabilecek noktalar kümesinin çözüm süresi boyunca noktanın yanında taşınmasının sebebi,
@@ -200,10 +205,12 @@ oluşturulur.
 
 c) Oluşturulan başlangıç çözümü kullanıcıya grafiksel arayüzle ve string sıralı gösterimiyle
 sunulur.
+
 d) Kullanıcı, arayüz aracılığıyla parametre değişimi yapmaz ise seçim yaptığı sezgisel yöntem,
 program içerisinde yine hard-code olarak tanımlanmış olan varsayılan değerlerle çözüm arama
 sürecini başlatılır. Parametreleri değiştirmesinin ardından yine bir sezgisel arama yöntemi
 seçerek, kullanıcı çözüm arama sürecini başlatır.
+
 e) Çözüm arama sürecinin tamamlanmasının ardından, bulunan iyileştirilmiş rota kullanıcıya
 grafiksel arayüzle ve string sıralı gösterimle sunulur. Ayrıca kullanıcıya çözüm süresinin ne
 kadar olduğu ile ilgili anlaşılır formatta bilgilendirme yapılır.
@@ -221,26 +228,34 @@ işlemleri aşağıdaki gibi sıralanmıştır.
 a) Her iki sezgisel araştırma yöntemi için ortak olan fonksiyonlar statik sınıflarda
 tanımlanmışlardır. Örneğin, çözüm süresi her iki yöntem için kullanıcıya belli bir formatta
 sunulmuştur. Bu formatın tanımlamasının yapıldığı method statik olarak tanımlanmıştır.
+
 b) Bir noktanın diğer noktalara olan geçiş matris bilgisinin her hesaplama işleminde okunması
 tercih edilmemiştir yalnızca bir kez okuma işlemi yapılmıştır.
+
 c) Her iki sezgisel araştırma yöntemi aynı problemin noktalarından bir rota hazırlamaya çalıştığı
 için, problemin oluşturulduğu bölüm statik sınıf içerisinde tanımlanmıştır.
+
 d) Kullanıcının bulunan rotayı doğru şekilde anlayabilmesi için, noktalar arası geçişler oklarla
 gösterilmiştir. Bu şekilde bir string format hazırlanmış ve kullanıcıya sunulmuştur.
+
 e) Rotanın kullanıcı tarafında net gözlemlenebilmesi için, noktalar arasındaki mesafeye sadık
-kalarak, küçültme ölçeklemesiyle rota çizilerek gösterim yapılmıştır,
+kalarak, küçültme ölçeklemesiyle rota çizilerek gösterim yapılmıştır.
+
 f) Sürdürülebilirlik açısından esnektir. Çözüm için kullanılan noktalar kümesi artırılabilir ya da
 azaltılabililir.
 
 ### Program Kısıtları
 Programın geliştirme aşamasında akla ön görülemeyen, çözüm sürecinin kontrolü ve çözüm kalitesini
 artırmaya yönelik bazı durumlar oluşmuştur. Bunlar aşağıda sıralanmıştır.
+
 a) Her bir komşuluk rotası ve komşuluğun mesafe maliyeti, kullanılan sezgisel yöntem ile bu
 yönteme ait parametrelerle kaydının tutulması yapılmamıştır. Örneğin tavlama method için bu
 yöntem uygulanabilseydi, sıcaklık düşüşüne bağlı olarak çözüm kalitesi gözlemlenebilirdi.
+
 b) Başlangıç çözümünün ardından yapılan iyileştirilmiş çözüm, ikinci isteğe başlangıç çözümü
 verilerek araştırma verilebilmesi(daha önce bahsedilen merdiven etkisi) yalnızca tavlama
 benzetimi için kodlanabilmiştir.
+
 c) Her çözüm isteği, çözüm isteğinin hangi yöntem ve parametrelerle yapılmak istendiği, elde
 edilen sonuç ve çözüm süresi gibi bilgiler kaydedilmemiştir. Dolayısıyla kıyaslama işlemi
 program çalışırken kullanıcının gözlem yeteneğine bırakılmıştır.
