@@ -178,6 +178,7 @@ yer değiştirmesi durumu değil aynı anda B-A yer değiştirmesi olayıda kont
 ![Resim-Tabu hareket kontrolü](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran8.png)
 
 - Tabu hareket kontrolünün C# programlama dili kullanılarak kontrol edilmesi
+
 ![](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran9.png)
 
 ### Programın Çalışma Adımları
