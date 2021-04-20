@@ -1,7 +1,9 @@
 ## Yıldız Ver! :star:
 Probleminizin çözümünü öğrenmek veya çözümü başlatmak için bu projeyi beğendiyseniz veya kullanıyorsanız, lütfen ona bir yıldız verin. Teşekkürler!
 <hr>
+
 # TezRota
+
 ## Proje Konusu ve Kullanıcı Etkileşimi
 Problem seti içinde belirtilen koordinat düzleminde tanımlı 20 adet noktanın başlangıç noktası fark
 etmeksizin kendi içerisinde en kısa uzunluğa sahip olacak şekilde rotalanması işlemini
