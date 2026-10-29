@@ -14,7 +14,7 @@ public partial class LabeledSlider : UserControl
     public static readonly DependencyProperty MaximumProperty = Register(nameof(Maximum), 100.0);
     public static readonly DependencyProperty StepProperty = Register(nameof(Step), 1.0);
     public static readonly DependencyProperty FormatProperty = Register(nameof(Format), "0", OnValueChanged);
-    public static readonly DependencyProperty AccentProperty = Register<Brush>(nameof(Accent), Brushes.DeepSkyBlue);
+    public static readonly DependencyProperty AccentProperty = Register<Brush>(nameof(Accent), new SolidColorBrush(Color.FromRgb(0x4F, 0x7F, 0xD6)));
 
     public LabeledSlider() => InitializeComponent();
 

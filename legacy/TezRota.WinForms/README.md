@@ -1,4 +1,4 @@
-> Bu dosya, deponun özgün Türkçe README'sidir (2019 tarihli yüksek lisans uygulaması). Güncel proje için [README.md](../README.md) dosyasına bakın.
+> Bu dosya, deponun özgün Türkçe README'sidir (2019 tarihli yüksek lisans uygulaması, WinForms). Güncel proje için [ana README](../../README.md) dosyasına bakın.
 
 ## Yıldız Ver! :star:
 Probleminizin çözümünü öğrenmek veya çözümü başlatmak için bu projeyi beğendiyseniz veya kullanıyorsanız, lütfen ona bir yıldız verin. Teşekkürler!
@@ -35,14 +35,14 @@ göre kullanıcıdan alınan hız değeriyle, rotanın ne kadar sürede tamamlan
 rotalama işleminin çözüm süresi ve rotanın sıralı dizilimi ekranda gösterilmektedir. Çözüm süresi,
 yalnızca algoritmanın çözüm süresini ifade etmektir.
 
-![Resim-Arayüz gösterimi](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran1.png)
+![Resim-Arayüz gösterimi](Photos/anaEkran1.png)
 
 ## Gezgin Satıcı Problemi Hakkında Bilgi
 Problem de amaç, bir satıcının bulunduğu şehirden başlayarak her şehre sadece bir kez uğradıktan sonra
 başladığı şehre dönen en kısa turu bulmaktır. Şehirler arası gidişi kuş bakışı olarak kabul edersek aşağıdaki
 örnek koordinat gösterimi ile problem tam olarak anlaşılacaktır.
 
-![Resim – Başlangıç Rotası](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran2.png)
+![Resim – Başlangıç Rotası](Photos/anaEkran2.png)
 
 ## Kullanılan Çözüm Yöntemleri
 Rotalama işleminin yapılabilmesi için iki tane sezgisel yaklaşımdan yararlanılır. Bunlar: tavlama benzetimi
@@ -71,7 +71,7 @@ Tavlama Benzetiminde, amaç fonksiyonunda artışa neden olabilecek komşu harek
 edilerek yerel en iyi noktalarından kurtulmak mümkündür. • Amaç fonksiyonunda artışa neden
 olabilecek bu komşu hareketin kabul edilip edilmemesi, rassal olarak belirlenmektedir.[1]
 
-![İniş algoritması çalışma mantığı](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran3.png)
+![İniş algoritması çalışma mantığı](Photos/anaEkran3.png)
 
 ### Yasaklı Arama Yöntemi İle Çözüm Yaklaşımı
 
@@ -89,7 +89,7 @@ Tabu arama algoritması her ne kadar istenmeyen noktaların işaretlenmesi olara
 daha cazip noktaların işaretlenmesi olarak ta kullanılır.
 Yasaklı armayı açıklamak için aşağıdaki gibi bir gösterimden yararlanılabilir:
 
-![](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran4.png)
+![](Photos/anaEkran4.png)
 
 Yukarıdaki ifadeyi açıklarsak; amaç fonksiyonu c(x) maliyet veya kar fonksiyonun en küçük veya en
 büyük değerin aranmaktadır fakat bu aramada x vektörü ile belirtilen kısıtlamalara uyularak çözüme
@@ -153,7 +153,7 @@ d) Aslında her bir kromozom linked list yapıdadır. Kromozomu oluşturan nokta
 
 e) Her komşuluk bilgisi rota ve mesafe maliyeti bilgisini taşır.
 
-![Resim-Kromozom Yapısı](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran5.png)
+![Resim-Kromozom Yapısı](Photos/anaEkran5.png)
 
 Yasaklı arama yönteminde komşuluk kümesi kullanılmıştır. Bu küme kromozomlardan oluşmaktadır.
 Kromozomlar üzerinde rastgele takas işlemi yapılarak komşulukların üretilmesi sağlanır. Komşuluk yapısı list
@@ -166,7 +166,7 @@ Toplam mesafesi hesaplanmak istenen noktaların belirlenmesinin ardından başla
 aşamasına geçilir. Hesaplanmak istenen bütün noktalar bir torbaya atılmış gibi düşünülür ve torbadan rastgele
 olarak sırasıyla seçim yaparak kromozom yapısına nokta eklemesi yapılır
 
-![Resim-Başlangıç çözüm oluşturma işlem](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran6.png)
+![Resim-Başlangıç çözüm oluşturma işlem](Photos/anaEkran6.png)
 
 ### Rotanın Mesafe Maliyetinin Hesaplanması
 
@@ -176,7 +176,7 @@ sebeple öklit formülü kullanılarak iki nokta arasındaki mesafe hesaplanmı�
 bulunan tüm mesafeler toplanarak, toplam mesafe maliyeti elde edilmiştir.
 - Öklit formülünün proje içerisinde C# programlama dili kullanılarak uygulanması
 
-![Resim-Başlangıç çözüm oluşturma işlem](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran7.png)
+![Resim-Başlangıç çözüm oluşturma işlem](Photos/anaEkran7.png)
 
 ### Yasaklı Hareketin Kontrolü
 
@@ -187,11 +187,11 @@ Programlama aşamasında fark edilmiştir ki A noktasının B noktasıyla yer de
 zamanda B noktasının A noktasıyla yer değiştirmesi anlamına gelmektedir. Bu sebeple yalnızca A-B
 yer değiştirmesi durumu değil aynı anda B-A yer değiştirmesi olayıda kontrol edilmiştir.
 
-![Resim-Tabu hareket kontrolü](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran8.png)
+![Resim-Tabu hareket kontrolü](Photos/anaEkran8.png)
 
 - Tabu hareket kontrolünün C# programlama dili kullanılarak kontrol edilmesi
 
-![](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran9.png)
+![](Photos/anaEkran9.png)
 
 ### Programın Çalışma Adımları
 
@@ -205,7 +205,7 @@ a) Program içerisinde hard-code olarak tanımlı 20 nokta kullanılarak problem
 kümesi tanımlanır. Bu tanımlama noktaların isim, numara ve koordinat bilgilerinin belirtilen
 CityPoint sınıfı içerisinde kurallı şekilde yazılması işlemidir.
 
-![Resim-CityPoint sınıfının tanımlama bilgisi](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran10.png)
+![Resim-CityPoint sınıfının tanımlama bilgisi](Photos/anaEkran10.png)
 
 Nokta bilgilerinin nesnelerle temsil edilmesinin ardından, rastgele olarak başlangıç çözümü
 oluşturulur.
@@ -222,9 +222,9 @@ e) Çözüm arama sürecinin tamamlanmasının ardından, bulunan iyileştirilmi
 grafiksel arayüzle ve string sıralı gösterimle sunulur. Ayrıca kullanıcıya çözüm süresinin ne
 kadar olduğu ile ilgili anlaşılır formatta bilgilendirme yapılır.
 
-![Resim-Sezgisel yöntemlerden biriyle çözüm arama süreci başlatılmadan önce](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran11.png)
+![Resim-Sezgisel yöntemlerden biriyle çözüm arama süreci başlatılmadan önce](Photos/anaEkran11.png)
 
-![Resim-Sezgisel yöntemlerden biriyle çözüm arama süreci başlatılmadan sonra](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran12.png)
+![Resim-Sezgisel yöntemlerden biriyle çözüm arama süreci başlatılmadan sonra](Photos/anaEkran12.png)
 
 ### Programın Çalışma Performansını Artıran İşlemler
 Programın, nokta tanımlaması, rota belirlenmesi ve kabul edilebilir bir rota düzenlemesinin
@@ -288,11 +288,11 @@ yapılmamıştır.
 e) Yasaklı arama yönteminde komşuluk değeri 12 olarak belirlenmiş ve bunun dışında bir değer için
 kontrol yapılmamıştır.
 
-![](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran13.png)
+![](Photos/anaEkran13.png)
 
-![](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran14.png)
+![](Photos/anaEkran14.png)
 
-![](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran15.png)
+![](Photos/anaEkran15.png)
 
 - Bulunan sonuçlar değerlendirildiğinde, her iki yönteminde başlangıç çözümü üzerinde iyileştirme
 yaptığı gözle görülür şekilde ortadadır.
@@ -310,7 +310,7 @@ başlansın yine aynı noktaya varılacağı için çember etkisi vardır ve top
 etmeyecektir. Bu sebeple birden fazla aynı sonuca sahip çözümler olduğu söylenebilir. Dolayısıyla aşağıda
 verilen çözüm görseli, 3690,06 mesafe değerine sahip çözümlerden herhangi biridir denilebilir.
 
-![Resim-İdeal Çözüm Örneği](https://github.com/NisanurBulut/TezRota/blob/master/Photos/anaEkran16.png)
+![Resim-İdeal Çözüm Örneği](Photos/anaEkran16.png)
 
 - Çözüm Sonuç:3690,06 km
 - Rota:R => J => D => O => C => M => F => H => P => N => T => S => A => U => I => E => B

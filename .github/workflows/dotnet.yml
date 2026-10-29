@@ -1,4 +1,4 @@
-# Builds and tests the new Phileas solution (src/ + tests/). The legacy WinForms project in the repo root
+# Builds and tests the new Phileas solution (src/ + tests/). The legacy WinForms project in legacy/TezRota.WinForms
 # is .NET Framework 4.8 and needs a local SQL Server, so CI does not build it.
 
 name: .NET CI

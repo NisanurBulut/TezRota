@@ -13,9 +13,9 @@ public sealed class RouteView : FrameworkElement
 {
     private const double Padding = 30;
     private static readonly Typeface LabelFont = new("Segoe UI Semibold");
-    private static readonly Brush CityFill = new SolidColorBrush(Color.FromRgb(0x0B, 0x10, 0x1C));
-    private static readonly Brush GridDot = new SolidColorBrush(Color.FromArgb(0x22, 0xFF, 0xFF, 0xFF));
-    private static readonly Brush LabelBrush = new SolidColorBrush(Color.FromRgb(0xCB, 0xD5, 0xE1));
+    private static readonly Brush CityFill = new SolidColorBrush(Colors.White);
+    private static readonly Brush GridDot = new SolidColorBrush(Color.FromArgb(0x99, 0xBA, 0xC8, 0xD3));
+    private static readonly Brush LabelBrush = new SolidColorBrush(Color.FromRgb(0x2A, 0x37, 0x44));
 
     public static readonly DependencyProperty CitiesProperty = DependencyProperty.Register(
         nameof(Cities), typeof(IReadOnlyList<City>), typeof(RouteView),
@@ -27,7 +27,7 @@ public sealed class RouteView : FrameworkElement
 
     public static readonly DependencyProperty AccentProperty = DependencyProperty.Register(
         nameof(Accent), typeof(Brush), typeof(RouteView),
-        new FrameworkPropertyMetadata(Brushes.DeepSkyBlue, FrameworkPropertyMetadataOptions.AffectsRender));
+        new FrameworkPropertyMetadata(new SolidColorBrush(Color.FromRgb(0x4F, 0x7F, 0xD6)), FrameworkPropertyMetadataOptions.AffectsRender));
 
     public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(
         nameof(IsActive), typeof(bool), typeof(RouteView),
@@ -176,7 +176,7 @@ public sealed class RouteView : FrameworkElement
                 var pulse = _phase % 12 / 12;
                 dc.DrawEllipse(null, new Pen(WithOpacity(Accent, 1 - pulse), 2), center, 9 + pulse * 14, 9 + pulse * 14);
             }
-            dc.DrawEllipse(Accent, new Pen(Brushes.White, 1.5), center, 8, 8);
+            dc.DrawEllipse(Accent, new Pen(Brushes.White, 2), center, 8, 8);
         }
         else
         {

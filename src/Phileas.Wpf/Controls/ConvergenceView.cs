@@ -15,15 +15,15 @@ public sealed class ConvergenceView : FrameworkElement
     private const double PlotMargin = 12;
     private const double BottomMargin = 26;
     private static readonly Typeface AxisFont = new("Segoe UI");
-    private static readonly Brush AxisBrush = new SolidColorBrush(Color.FromRgb(0x94, 0xA3, 0xB8));
-    private static readonly Pen GridPen = new(new SolidColorBrush(Color.FromArgb(0x26, 0xFF, 0xFF, 0xFF)), 1);
+    private static readonly Brush AxisBrush = new SolidColorBrush(Color.FromRgb(0x56, 0x65, 0x74));
+    private static readonly Pen GridPen = new(new SolidColorBrush(Color.FromArgb(0x24, 0x13, 0x1A, 0x22)), 1);
 
     public static readonly DependencyProperty AnnealingResultProperty = Register<SolveResult?>(nameof(AnnealingResult), null);
     public static readonly DependencyProperty AnnealingReplayedProperty = Register(nameof(AnnealingReplayed), 0L);
-    public static readonly DependencyProperty AnnealingBrushProperty = Register<Brush>(nameof(AnnealingBrush), Brushes.DeepSkyBlue);
+    public static readonly DependencyProperty AnnealingBrushProperty = Register<Brush>(nameof(AnnealingBrush), new SolidColorBrush(Color.FromRgb(0x4F, 0x7F, 0xD6)));
     public static readonly DependencyProperty TabuResultProperty = Register<SolveResult?>(nameof(TabuResult), null);
     public static readonly DependencyProperty TabuReplayedProperty = Register(nameof(TabuReplayed), 0L);
-    public static readonly DependencyProperty TabuBrushProperty = Register<Brush>(nameof(TabuBrush), Brushes.Orange);
+    public static readonly DependencyProperty TabuBrushProperty = Register<Brush>(nameof(TabuBrush), new SolidColorBrush(Color.FromRgb(0xC9, 0x7C, 0x5D)));
 
     public SolveResult? AnnealingResult { get => (SolveResult?)GetValue(AnnealingResultProperty); set => SetValue(AnnealingResultProperty, value); }
     public long AnnealingReplayed { get => (long)GetValue(AnnealingReplayedProperty); set => SetValue(AnnealingReplayedProperty, value); }

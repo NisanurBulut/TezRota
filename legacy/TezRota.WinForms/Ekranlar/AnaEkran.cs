@@ -95,13 +95,7 @@ namespace TezRota
                         cIstek.TasimaNoktaAracBilgisiEsle();
                         //6-) Başlangıç Kromozom Oluştur
                         cIstek.BaslangicKromozomOlustur();
-                        //7)
 
-                        //foreach (var b in cIstek.NakliyeListesi)
-                        //{
-                        //    txtBaslangicCozum.AppendText(b.NakliyeNo + " : " + string.Join(",", b.RotaList.ToList()) + " Skor : " + b.NakSkor + Environment.NewLine);
-                        //}
-                        //txtBaslangicCozum.AppendText("Toplam Skor : " + cIstek.NakliyeListesi.Max(a => a.NakSkor));
 
                         //7-) Tavlama Benzetimi Uygula
                         cIstek.TavlamaBenzetimiUygula();
@@ -125,7 +119,6 @@ namespace TezRota
             }
           
 
-          //  MessageBox.Show("","Çözüm tamamlandı", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void BtnPlanAktar_Click(object sender, EventArgs e)
@@ -144,7 +137,6 @@ namespace TezRota
 
         private void BtnPlanSec_Click(object sender, EventArgs e)
         {
-            //labelTimer.Text = "";
             txtExcelFilePath.Clear();//yeni dosya browse edildiğinde textbox clear edilir
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
