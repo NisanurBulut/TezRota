@@ -6,6 +6,7 @@ $root = Split-Path $PSScriptRoot -Parent
 $assets = Join-Path $root 'src\Phileas.Wpf\Assets'
 $dictionary = [System.Windows.Markup.XamlReader]::Load([System.IO.File]::OpenRead((Join-Path $assets 'Logo.xaml')))
 $logo = $dictionary['LogoImage']
+$logoSmall = $dictionary['LogoSmallImage']
 
 function Save-Png($visual, $width, $height, $path) {
     $bitmap = New-Object System.Windows.Media.Imaging.RenderTargetBitmap $width, $height, 96, 96, ([System.Windows.Media.PixelFormats]::Pbgra32)
@@ -20,13 +21,14 @@ function Save-Png($visual, $width, $height, $path) {
 function New-LogoVisual($size) {
     $visual = New-Object System.Windows.Media.DrawingVisual
     $context = $visual.RenderOpen()
-    $context.DrawImage($logo, (New-Object System.Windows.Rect 0, 0, $size, $size))
+    $artwork = if ($size -le 32) { $logoSmall } else { $logo }
+    $context.DrawImage($artwork, (New-Object System.Windows.Rect 0, 0, $size, $size))
     $context.Close()
     $visual
 }
 
-# Icon with PNG-compressed entries
-$sizes = 16, 32, 48, 64, 128, 256
+# Icon with PNG-compressed entries; the small sizes use a simplified drawing that stays readable at 16 px
+$sizes = 16, 20, 24, 32, 40, 48, 64, 128, 256
 $pngs = @()
 foreach ($size in $sizes) {
     $temp = [System.IO.Path]::GetTempFileName()
