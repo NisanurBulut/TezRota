@@ -41,4 +41,26 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
+
+    <!-- Simplified logo for 16-32 px icons: bigger balloon, no ropes or route -->
+    <DrawingImage x:Key="LogoSmallImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Geometry="M56,0 L200,0 A56,56 0 0 1 256,56 L256,200 A56,56 0 0 1 200,256 L56,256 A56,56 0 0 1 0,200 L0,56 A56,56 0 0 1 56,0 Z">
+                    <GeometryDrawing.Brush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#2E3E50" Offset="0" />
+                            <GradientStop Color="#18222C" Offset="1" />
+                        </LinearGradientBrush>
+                    </GeometryDrawing.Brush>
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#99BAC8D3" Thickness="14" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="#7AA2E3" Geometry="M128,26 C190,26 224,68 214,114 C206,148 172,168 156,188 L100,188 C84,168 50,148 42,114 C32,68 66,26 128,26 Z" />
+                <GeometryDrawing Brush="#C97C5D" Geometry="M128,26 C104,58 102,150 112,188 L144,188 C154,150 152,58 128,26 Z" />
+                <GeometryDrawing Brush="#BAC8D3" Geometry="M106,204 L150,204 A6,6 0 0 1 156,210 L156,226 A6,6 0 0 1 150,232 L106,232 A6,6 0 0 1 100,226 L100,210 A6,6 0 0 1 106,204 Z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 </ResourceDictionary>

@@ -1,11 +1,5 @@
-<h1 align="center">
-  <img src="docs/images/phileas-logo.svg" width="120" alt="Phileas logo: a hot-air balloon above a dotted route"><br>
-  Phileas
-</h1>
-
 <p align="center">
-  <b>Watch two algorithms race around the world.</b><br>
-  Simulated Annealing vs. Tabu Search on the travelling salesman problem, in a modern WPF / MVVM desktop app.
+  <img src="docs/images/phileas-banner.svg" alt="Phileas – watch two algorithms race around the world" width="100%">
 </p>
 
 <p align="center">
@@ -14,14 +8,11 @@
   <img src="docs/images/badges/ui.svg" alt="WPF and MVVM">
   <a href="LICENSE"><img src="docs/images/badges/license.svg" alt="GPL-3.0 license"></a>
   <a href="https://github.com/NisanurBulut/TezRota/releases"><img src="docs/images/badges/releases.svg" alt="Releases"></a>
+  &nbsp;⭐ <b>Like it? Give it a star!</b>
 </p>
 
 <p align="center">
-  ⭐ <b>If Phileas impressed or helped you, please give it a star – it means a lot!</b> ⭐
-</p>
-
-<p align="center">
-  <img src="docs/images/phileas-demo.gif" alt="Phileas comparing Simulated Annealing and Tabu Search" width="880">
+  <img src="docs/images/phileas-demo.gif" alt="Phileas comparing Simulated Annealing and Tabu Search" width="100%">
 </p>
 
 Phileas takes random cities, builds one random tour and lets two metaheuristics improve it. You see both routes
