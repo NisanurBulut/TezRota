@@ -10,10 +10,10 @@
 
 <p align="center">
   <a href="https://github.com/NisanurBulut/TezRota/actions/workflows/dotnet.yml"><img src="https://github.com/NisanurBulut/TezRota/actions/workflows/dotnet.yml/badge.svg" alt="Build status"></a>
-  <a href="https://github.com/NisanurBulut/TezRota/releases"><img src="https://img.shields.io/github/v/release/NisanurBulut/TezRota?color=7AA2E3" alt="Latest release"></a>
-  <img src="https://img.shields.io/badge/.NET-10-5B8A72" alt=".NET 10">
-  <img src="https://img.shields.io/badge/WPF-MVVM-C97C5D" alt="WPF MVVM">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-BAC8D3" alt="GPL-3.0 license"></a>
+  <img src="docs/images/badges/dotnet.svg" alt=".NET 10">
+  <img src="docs/images/badges/ui.svg" alt="WPF and MVVM">
+  <a href="LICENSE"><img src="docs/images/badges/license.svg" alt="GPL-3.0 license"></a>
+  <a href="https://github.com/NisanurBulut/TezRota/releases"><img src="docs/images/badges/releases.svg" alt="Releases"></a>
 </p>
 
 <p align="center">
