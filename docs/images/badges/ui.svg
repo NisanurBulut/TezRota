@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="124" height="22" role="img" aria-label="UI: WPF · MVVM">
+  <clipPath id="r"><rect width="124" height="22" rx="4"/></clipPath>
+  <g clip-path="url(#r)"><rect width="32" height="22" fill="#131A22"/><rect x="32" width="92" height="22" fill="#C97C5D"/></g>
+  <g fill="#fff" font-family="Verdana,DejaVu Sans,sans-serif" font-size="11" text-anchor="middle">
+    <text x="16" y="15">UI</text>
+    <text x="78" y="15">WPF · MVVM</text>
+  </g>
+</svg>

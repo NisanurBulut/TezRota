@@ -187,7 +187,7 @@
                                                     <Setter Property="Background" Value="Transparent" />
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding IsBest}" Value="True">
-                                                            <Setter Property="Background" Value="#4A5B8A72" />
+                                                            <Setter Property="Background" Value="#CDEBD9" />
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
