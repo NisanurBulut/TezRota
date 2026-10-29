@@ -102,11 +102,11 @@ Two production projects and one test project. Layering is kept deliberately flat
 ```
 TezRota/                          repo root (name may become "Phileas")
 ├── Phileas.sln                   solution of the new code
-├── TezRota.sln, TezRota.csproj   legacy WinForms application, untouched
+├── legacy/TezRota.WinForms/      original WinForms thesis application (own .sln), untouched
 ├── .github/
 │   ├── workflows/                dotnet.yml (CI), release.yml (versioning), auto-assign.yml
 │   └── pull_request_template.md
-├── docs/                         this document, screenshots, original Turkish README
+├── docs/                         this document and screenshots
 ├── src/
 │   ├── Directory.Build.props     Nullable, ImplicitUsings, LangVersion, warnings as errors
 │   ├── Phileas.Core/

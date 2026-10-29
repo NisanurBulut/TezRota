@@ -58,7 +58,7 @@ dotnet test Phileas.sln
 | `src/Phileas.Wpf` | WPF front end: views, ViewModels (CommunityToolkit.Mvvm), dependency injection, theme, custom controls. |
 | `tests/Phileas.Core.Tests` | xUnit tests for the solvers. |
 | `docs/ARCHITECTURE.md` | Design document: analysis of the legacy code, architecture, UI design, ADRs. |
-| `TezRota.sln` + root `*.cs` folders | The original WinForms application (.NET Framework 4.8, needs SQL Server). Unchanged. |
+| `legacy/TezRota.WinForms` | The original 2019 WinForms thesis application (.NET Framework 4.8, needs SQL Server). Kept unchanged for reference. |
 
 Defaults can be changed in `src/Phileas.Wpf/appsettings.json`.
 
@@ -88,7 +88,7 @@ Das Projekt ist die Neuimplementierung meiner Masterarbeit (WinForms, 2019). Ein
 
 ## Original Turkish documentation
 
-The README of the original thesis application is preserved in [docs/README.tr.md](docs/README.tr.md).
+The README of the original thesis application is preserved in [legacy/TezRota.WinForms/README.md](legacy/TezRota.WinForms/README.md).
 
 ## License
 
