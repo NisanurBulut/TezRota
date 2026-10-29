@@ -1,0 +1,44 @@
+# Builds and tests the new Phileas solution (src/ + tests/). The legacy WinForms project in the repo root
+# is .NET Framework 4.8 and needs a local SQL Server, so CI does not build it.
+
+name: .NET CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    # WPF only builds on Windows.
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+    - run: dotnet restore Phileas.sln
+    - run: dotnet build Phileas.sln --no-restore --configuration Release
+    - run: dotnet test Phileas.sln --no-build --configuration Release
+
+  label-hotfix:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Label hotfix PR
+        if: github.event_name == 'pull_request' && contains(github.head_ref, 'hotfix')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels -f "labels[]=bug"
+      - name: Label dev PR
+        if: github.event_name == 'pull_request' && contains(github.head_ref, 'dev')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels -f "labels[]=enhancement"
+      - name: Label major PR
+        if: github.event_name == 'pull_request' && contains(github.head_ref, 'major')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels -f "labels[]=breaking"
