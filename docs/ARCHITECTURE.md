@@ -148,16 +148,15 @@ cards, soft shadows, gradient logo and primary button, Segoe Fluent icons, vecto
 │ │ Animation │ │ │  └───────────────────────────┘  │ │ │  └───────────────────────────┘ │   │
 │ │ [New city]│ │ │  ━━━━ progress                  │ │ │  ━━━━ progress                 │   │
 │ └───────────┘ │ │  Distance Travel Iteration Solve │ │ │  Distance Travel Iteration ... │   │
-│ ┌ Annealing ▷┐│ │  O→H→N→Q→…                       │ │ │  R→F→M→…                       │   │
-│ │ sliders   ││ └──────────────────────────────────┘ │ └────────────────────────────────┘   │
+│ ┌ [Annealing|Tabu] ┐ │ │  O→H→N→Q→…                       │ │ │  R→F→M→…                       │   │
+│ │ 3 sliders +[Run]│ │ └──────────────────────────────────┘ │ └────────────────────────────────┘   │
 │ └───────────┘ │ ┌ Convergence ───────────────────┐   ┌ Results ──────────────────────────┐ │
-│ ┌ Tabu      ▷┐│ │ best distance vs iterations    │   │ method | km | time | solve | gain │ │
-│ │ sliders   ││ └────────────────────────────────┘   └───────────────────────────────────┘ │
-│ [ Compare both methods ]                                                                    │
+│               │ │ best distance vs iterations    │   │ method | km | time | solve | gain │ │
+│ [Compare both]│ └────────────────────────────────┘   └───────────────────────────────────┘ │
 └───────────────┴──────────────────────────────────────┴─────────────────────────────────────┘
 ```
 
-**Layout decisions**: parameters on the left (cause), the two live routes side by side in the centre (effect, same
+**Layout decisions**: parameters on the left (cause; the two methods share one tabbed card so everything fits a 720 px high window without scrolling), the two live routes side by side in the centre (effect, same
 scale so they are directly comparable), numbers below the routes, convergence and results at the bottom.
 The two methods have fixed colours everywhere (Atlas blue = annealing, copper = tabu, map green = shortest tour) so charts, chips and routes read
 at a glance. Sliders instead of text boxes make every input valid by construction, so no validation UI is needed.

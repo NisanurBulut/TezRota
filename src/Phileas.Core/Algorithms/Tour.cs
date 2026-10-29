@@ -25,7 +25,6 @@ public static class Tour
     public static TimeSpan TravelTime(double distanceKm, double speedKmPerHour) =>
         speedKmPerHour > 0 ? TimeSpan.FromHours(distanceKm / speedKmPerHour) : TimeSpan.Zero;
 
-    /// <summary>Text such as "G→L→K→G".</summary>
     public static string Describe(IReadOnlyList<City> cities, int[] order) =>
         string.Join("→", order.Append(order[0]).Select(i => cities[i].Name));
 }

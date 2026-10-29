@@ -1,0 +1,107 @@
+<UserControl x:Class="Phileas.Wpf.Views.AlgorithmPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:Phileas.Wpf.Controls"
+             x:Name="Root">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="DoneBrush" Color="#4B8466" />
+        <Style x:Key="ChipFillStyle" TargetType="Border">
+            <Setter Property="Background" Value="{Binding Accent, ElementName=Root}" />
+            <Setter Property="Opacity" Value="0.2" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding State}" Value="Solving">
+                    <Setter Property="Opacity" Value="1" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="Replaying">
+                    <Setter Property="Opacity" Value="1" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="Done">
+                    <Setter Property="Background" Value="{StaticResource DoneBrush}" />
+                    <Setter Property="Opacity" Value="1" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ChipTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{Binding Accent, ElementName=Root}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding State}" Value="Solving">
+                    <Setter Property="Foreground" Value="White" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="Replaying">
+                    <Setter Property="Foreground" Value="White" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding State}" Value="Done">
+                    <Setter Property="Foreground" Value="White" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Border Style="{StaticResource Card}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <DockPanel Margin="0,0,0,12">
+                <!-- Status chip: tinted while ready, solid accent while working, green when done -->
+                <Grid DockPanel.Dock="Right" VerticalAlignment="Center">
+                    <Border x:Name="ChipFill" Style="{StaticResource ChipFillStyle}" CornerRadius="10" />
+                    <TextBlock x:Name="ChipText" Style="{StaticResource ChipTextStyle}" Text="{Binding StatusText}" Margin="11,4" FontSize="12" FontWeight="Bold" />
+                </Grid>
+                <Ellipse DockPanel.Dock="Left" Width="10" Height="10" Margin="0,0,10,0" Fill="{Binding Accent, ElementName=Root}" VerticalAlignment="Center" />
+                <StackPanel>
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource CardTitle}" />
+                    <TextBlock Text="{Binding Description}" Style="{StaticResource Caption}" TextTrimming="CharacterEllipsis" />
+                </StackPanel>
+            </DockPanel>
+
+            <Border Grid.Row="1" CornerRadius="12" Background="{StaticResource CanvasBrush}" BorderBrush="{StaticResource CanvasBorderBrush}" BorderThickness="1">
+                <c:RouteView Cities="{Binding Cities}" Order="{Binding DisplayedOrder}"
+                             Accent="{Binding Accent, ElementName=Root}" IsActive="{Binding IsBusy}" />
+            </Border>
+
+            <!-- Progress: endless while searching, filled while the improvements are replayed -->
+            <ProgressBar Grid.Row="2" Height="4" Margin="0,10,0,10" Maximum="1" Value="{Binding ReplayProgress, Mode=OneWay}"
+                         Foreground="{Binding Accent, ElementName=Root}" Background="#1A131A22">
+                <ProgressBar.Style>
+                    <Style TargetType="ProgressBar" BasedOn="{StaticResource {x:Type ProgressBar}}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding State}" Value="Solving">
+                                <Setter Property="IsIndeterminate" Value="True" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ProgressBar.Style>
+            </ProgressBar>
+
+            <StackPanel Grid.Row="3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" /><ColumnDefinition Width="1.5*" /><ColumnDefinition Width="1.2*" /><ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="Distance" Style="{StaticResource Caption}" />
+                        <TextBlock Text="{Binding DistanceText}" Style="{StaticResource StatValue}" FontSize="17" Foreground="{Binding Accent, ElementName=Root}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="Travel time" Style="{StaticResource Caption}" />
+                        <TextBlock Text="{Binding TravelTimeText}" Style="{StaticResource StatValue}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Iteration" Style="{StaticResource Caption}" />
+                        <TextBlock Text="{Binding IterationText}" Style="{StaticResource StatValue}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="3">
+                        <TextBlock Text="Solve time" Style="{StaticResource Caption}" />
+                        <TextBlock Text="{Binding SolveTimeText}" Style="{StaticResource StatValue}" />
+                    </StackPanel>
+                </Grid>
+                <TextBlock Text="{Binding RouteText}" Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,10,0,0"
+                           MinHeight="30" MaxHeight="30" TextTrimming="CharacterEllipsis" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

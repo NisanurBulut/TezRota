@@ -5,40 +5,39 @@
     <DrawingImage x:Key="LogoImage">
         <DrawingImage.Drawing>
             <DrawingGroup>
-                <!-- Rounded gradient tile -->
                 <GeometryDrawing Geometry="M56,0 L200,0 A56,56 0 0 1 256,56 L256,200 A56,56 0 0 1 200,256 L56,256 A56,56 0 0 1 0,200 L0,56 A56,56 0 0 1 56,0 Z">
                     <GeometryDrawing.Brush>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="#6366F1" Offset="0" />
-                            <GradientStop Color="#22D3EE" Offset="1" />
+                            <GradientStop Color="#1F2A36" Offset="0" />
+                            <GradientStop Color="#131A22" Offset="1" />
                         </LinearGradientBrush>
                     </GeometryDrawing.Brush>
-                </GeometryDrawing>
-
-                <!-- Balloon envelope and centre panel -->
-                <GeometryDrawing Brush="White" Geometry="M128,32 C176,32 204,68 196,106 C190,136 160,154 148,170 L108,170 C96,154 66,136 60,106 C52,68 80,32 128,32 Z" />
-                <GeometryDrawing Brush="#556366F1" Geometry="M128,32 C108,58 108,134 118,170 L138,170 C148,134 148,58 128,32 Z" />
-
-                <!-- Ropes and basket -->
-                <GeometryDrawing Geometry="M112,190 L108,170 M144,190 L148,170">
                     <GeometryDrawing.Pen>
-                        <Pen Brush="White" Thickness="3" StartLineCap="Round" EndLineCap="Round" />
+                        <Pen Brush="#40BAC8D3" Thickness="3" />
                     </GeometryDrawing.Pen>
                 </GeometryDrawing>
-                <GeometryDrawing Brush="White" Geometry="M116,188 L140,188 A4,4 0 0 1 144,192 L144,208 A4,4 0 0 1 140,212 L116,212 A4,4 0 0 1 112,208 L112,192 A4,4 0 0 1 116,188 Z" />
 
-                <!-- Dotted route with two stops -->
+                <GeometryDrawing Brush="#7AA2E3" Geometry="M128,32 C176,32 204,68 196,106 C190,136 160,154 148,170 L108,170 C96,154 66,136 60,106 C52,68 80,32 128,32 Z" />
+                <GeometryDrawing Brush="#C97C5D" Geometry="M128,32 C108,58 108,134 118,170 L138,170 C148,134 148,58 128,32 Z" />
+
+                <GeometryDrawing Geometry="M112,190 L108,170 M144,190 L148,170">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#BAC8D3" Thickness="3" StartLineCap="Round" EndLineCap="Round" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="#BAC8D3" Geometry="M116,188 L140,188 A4,4 0 0 1 144,192 L144,208 A4,4 0 0 1 140,212 L116,212 A4,4 0 0 1 112,208 L112,192 A4,4 0 0 1 116,188 Z" />
+
                 <GeometryDrawing Geometry="M40,226 C84,250 176,250 216,222">
                     <GeometryDrawing.Pen>
-                        <Pen Brush="White" Thickness="5" StartLineCap="Round" EndLineCap="Round" DashCap="Round">
+                        <Pen Brush="#5B8A72" Thickness="5" StartLineCap="Round" EndLineCap="Round" DashCap="Round">
                             <Pen.DashStyle>
                                 <DashStyle Dashes="0.1 2.2" />
                             </Pen.DashStyle>
                         </Pen>
                     </GeometryDrawing.Pen>
                 </GeometryDrawing>
-                <GeometryDrawing Brush="White" Geometry="M33,226 A7,7 0 1 0 47,226 A7,7 0 1 0 33,226 Z" />
-                <GeometryDrawing Brush="White" Geometry="M209,222 A7,7 0 1 0 223,222 A7,7 0 1 0 209,222 Z" />
+                <GeometryDrawing Brush="#BAC8D3" Geometry="M33,226 A7,7 0 1 0 47,226 A7,7 0 1 0 33,226 Z" />
+                <GeometryDrawing Brush="#BAC8D3" Geometry="M209,222 A7,7 0 1 0 223,222 A7,7 0 1 0 209,222 Z" />
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>

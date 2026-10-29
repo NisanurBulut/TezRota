@@ -6,7 +6,6 @@ public static class CityGenerator
     public const double Height = 600;
     private const double Margin = 40;
 
-    /// <summary>Creates <paramref name="count"/> random cities named A, B, C, ... (P27, P28, ... after Z).</summary>
     public static IReadOnlyList<City> Create(int count, int? seed = null)
     {
         var random = seed is { } s ? new Random(s) : new Random();

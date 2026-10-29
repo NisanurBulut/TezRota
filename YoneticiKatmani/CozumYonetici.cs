@@ -44,7 +44,6 @@ namespace TezRota.YoneticiKatmani
             {
                 AracTipleri = dc.tAracTipis.Select(a => a.Id).ToList();
                 TasimaListesi = dc.tTasimas.Where(a => a.PlanId==this.PlanId).Select(a => a.Tasima()).ToList();
-                //TasimaListesi = dc.tTasimas.Where(a => this.AracTipleri.Contains(a.TasimaTipi)).Select(a => a.Tasima()).ToList();
             }
         }
         public void AracListesiniOku()
@@ -179,7 +178,6 @@ namespace TezRota.YoneticiKatmani
                 
                 nakSkor = RotaSkorHesapla(item.RotaList);
                 item.NakSkor = nakSkor;
-                //System.Diagnostics.Debug.WriteLine(item.NakliyeNo+" : " + item.NakSkor + " : 65," + string.Join(",", item.RotaList));
             }
             maxSkor= _nakliyeListesi.Max(a => nakSkor);
             return maxSkor;
@@ -211,7 +209,6 @@ namespace TezRota.YoneticiKatmani
             {
                 for (int k = 0; k < Iteration; k++)
                 {
-                    //System.Diagnostics.Debug.WriteLine("Sıcaklık : "+sicaklik+" : "+ "KomşuSkor1 : "+ KomsuSkor1);
                     //her nakliye için her iterasyonda bir swap yapılır_> Komşuluk 2
                     KomsulukCozum2.Clear();
                     foreach (var n in KomsulukCozum1)
@@ -228,12 +225,10 @@ namespace TezRota.YoneticiKatmani
                         //seçilen taşımaları bul
                         var r1 = KRota1.ElementAt(ind1);
                         var r2 = KRota1.ElementAt(ind2);
-                        //Debug.WriteLine(string.Join(",", n.RotaList));
 
                         //swap işlemini yap
                         n.RotaList[ind1] = r2;
                         n.RotaList[ind2] = r1;
-                        //Debug.WriteLine(string.Join(",",n.RotaList));
 
                         KRota2.Clear();
                         KRota2.AddRange(n.RotaList); //Komşuluk2
@@ -350,55 +345,3 @@ namespace TezRota.YoneticiKatmani
         }
     }
 }
-
-
-
-
-/* //System.Diagnostics.Debug.WriteLine("------------------------------------------------------------");
-                       //System.Diagnostics.Debug.WriteLine("Komşuluk 1 : 65," + string.Join(",", n.TasimaListesi.Select(a => a.HedefId).ToList()));
-                        rnd.Next();
-                        var nakl = new Nakliye();
-                        nakl.TasimaListesi.AddRange(n.TasimaListesi);
-                        //başlangıç ve bitiş noktası dışındakileri al
-                        var rList = n.TasimaListesi.Where(a => a.KaynakNokta.Id != 65 && a.HedefNokta.Id != 65).ToList();
-                       
-                        //İç rotadan rassal iki taşıma seç
-                        int ind1 = rnd.Next(0, rList.Count);
-                        int ind2= rnd.Next(0, rList.Count);
-
-                        //seçilen taşımaları bul
-                        var r1 = n.TasimaListesi.ElementAt(ind1);
-                        var r2 = n.TasimaListesi.ElementAt(ind2);
-
-                        //seçilen taşımaları belirle Çünkü başlangıç ve bitiş taşımalarını en başta dışladın
-                        var ran1 = n.TasimaListesi.Where(a => a.Id == r1.Id).FirstOrDefault();
-                        var ran2 = n.TasimaListesi.Where(a => a.Id == r2.Id).FirstOrDefault();
-                        //System.Diagnostics.Debug.WriteLine("N: "+n.NakliyeNo+" Swap :" + ran2.HedefNokta.Id + " => " + ran1.HedefNokta.Id);
-
-                        //taşımayı belirle
-                        var a1 = n.TasimaListesi.IndexOf(ran1);
-                        var a2 = n.TasimaListesi.IndexOf(ran2);
-                        var s1= ran1.SiraId;
-                        var s2 = ran2.SiraId;
-
-                        nakl.TasimaListesi[a1].SiraId = s2;
-
-                        nakl.TasimaListesi[a2].SiraId = s1;
-
-                        //swap işlemini yap
-                        nakl.TasimaListesi[a2] = ran1;
-                        nakl.TasimaListesi[a1] = ran2;
-
-                        
-
-                        //System.Diagnostics.Debug.WriteLine("Komşuluk 2 : 65," + string.Join(",", nakl.TasimaListesi.Select(a => a.HedefId).ToList()));
-                        //swapten dolayı kaynak-hedef guncelleme işlemi yapılabilmeli.
-                        //System.Diagnostics.Debug.WriteLine("Komşuluk 2 : " + string.Join(",", nakl.TasimaListesi.Select(a => a.SiraId).ToList()));
-                        nakl.TasimaListesi = nakl.TasimaListesi.OrderBy(a=>a.SiraId).ToList();
-                        //System.Diagnostics.Debug.WriteLine("Komşuluk 2 : " + string.Join(",", nakl.TasimaListesi.Select(a => a.SiraId).ToList()));
-                        //System.Diagnostics.Debug.WriteLine("Komşuluk 2 : 65," + string.Join(",", nakl.TasimaListesi.Select(a => a.HedefId).ToList()));
-                        
-                        nakl.RotaList = nakl.TasimaListesi.Select(a => a.HedefId).ToList();
-                        nakl.NakliyeNo = n.NakliyeNo;
-                       
-                        KomsulukCozum2.Add(nakl);*/
