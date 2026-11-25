@@ -8,6 +8,7 @@ namespace Phileas.Wpf.Controls;
 /// <summary>
 /// Draws the cities and the tour through them. While <see cref="IsActive"/> is true a stream of light dots
 /// runs along the route and the start city pulses, so a running search never looks frozen.
+/// Pick locations in a <see cref="Warehouse"/> are drawn between racks and the route follows the aisles.
 /// </summary>
 public sealed class RouteView : FrameworkElement
 {
@@ -16,6 +17,7 @@ public sealed class RouteView : FrameworkElement
     private static readonly Brush CityFill = new SolidColorBrush(Colors.White);
     private static readonly Brush GridDot = new SolidColorBrush(Color.FromArgb(0x99, 0xBA, 0xC8, 0xD3));
     private static readonly Brush LabelBrush = new SolidColorBrush(Color.FromRgb(0x2A, 0x37, 0x44));
+    private static readonly Brush RackFill = new SolidColorBrush(Color.FromRgb(0xD5, 0xDE, 0xE8));
 
     public static readonly DependencyProperty CitiesProperty = DependencyProperty.Register(
         nameof(Cities), typeof(IReadOnlyList<City>), typeof(RouteView),
@@ -107,9 +109,24 @@ public sealed class RouteView : FrameworkElement
             }
         }
 
+        var inWarehouse = cities[0].InWarehouse;
+        if (inWarehouse)
+        {
+            foreach (var x in Warehouse.Aisles.SelectMany(aisle => new[] { aisle - 15 - Warehouse.RackWidth, aisle + 15 }))
+            {
+                var rack = new Rect(left + x * scale, top + (Warehouse.Top + 30) * scale,
+                    Warehouse.RackWidth * scale, (Warehouse.Bottom - Warehouse.Top - 60) * scale);
+                dc.DrawRoundedRectangle(RackFill, null, rack, 3, 3);
+            }
+        }
+
         if (Order is { Length: > 1 } order)
         {
-            DrawRoute(dc, order.Select(i => ToScreen(cities[i])).ToArray());
+            var route = inWarehouse
+                ? order.SelectMany((c, k) => Warehouse.Walk(cities[c], cities[order[(k + 1) % order.Length]]))
+                    .Select(p => new Point(left + p.X * scale, top + p.Y * scale))
+                : order.Select(i => ToScreen(cities[i]));
+            DrawRoute(dc, route.ToArray());
         }
 
         var startCity = Order is { Length: > 0 } ? cities[Order[0]] : null;

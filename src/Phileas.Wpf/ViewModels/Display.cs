@@ -4,7 +4,11 @@ namespace Phileas.Wpf.ViewModels;
 
 internal static class Display
 {
-    public static string Distance(double km) => string.Create(CultureInfo.InvariantCulture, $"{km:N0} km");
+    /// <summary>Short warehouse walks are shown in metres, city tours in km.</summary>
+    public static string Distance(double km) =>
+        km < 10
+            ? string.Create(CultureInfo.InvariantCulture, $"{km * 1000:N0} m")
+            : string.Create(CultureInfo.InvariantCulture, $"{km:N0} km");
 
     public static string TravelTime(TimeSpan time) =>
         time.TotalHours >= 1 ? $"{(int)time.TotalHours} h {time.Minutes:00} min" : $"{time.Minutes} min {time.Seconds:00} s";
