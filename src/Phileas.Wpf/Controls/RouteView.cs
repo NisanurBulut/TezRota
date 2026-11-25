@@ -15,6 +15,7 @@ namespace Phileas.Wpf.Controls;
 public sealed class RouteView : FrameworkElement
 {
     private const double Padding = 30;
+    private const double LaneOffset = 4;
     private static readonly Typeface LabelFont = new("Segoe UI Semibold");
     private static readonly Brush CityFill = new SolidColorBrush(Colors.White);
     private static readonly Brush GridDot = new SolidColorBrush(Color.FromArgb(0x99, 0xBA, 0xC8, 0xD3));
@@ -170,10 +171,10 @@ public sealed class RouteView : FrameworkElement
         if (Order is { Length: > 1 } order)
         {
             var route = inWarehouse
-                ? order.SelectMany((c, k) => Warehouse.Walk(cities[c], cities[order[(k + 1) % order.Length]]))
-                    .Select(p => new Point(left + p.X * scale, top + p.Y * scale))
-                : order.Select(i => ToScreen(cities[i]));
-            DrawRoute(dc, route.ToArray());
+                ? ToLanes(order.SelectMany((c, k) => Warehouse.Walk(cities[c], cities[order[(k + 1) % order.Length]]))
+                    .Select(p => new Point(left + p.X * scale, top + p.Y * scale)).ToArray(), closed: true)
+                : order.Select(i => ToScreen(cities[i])).ToArray();
+            DrawRoute(dc, route);
         }
 
         var leg = inWarehouse ? HoveredLeg(cities) : null;
@@ -218,7 +219,7 @@ public sealed class RouteView : FrameworkElement
         }
 
         var points = LegPoints(from, Warehouse.Walk(from, to, chosen));
-        DrawPolyline(dc, points, new Pen(Accent, 5) { LineJoin = PenLineJoin.Round, StartLineCap = PenLineCap.Round, EndLineCap = PenLineCap.Round });
+        DrawPolyline(dc, ToLanes(points, closed: false), new Pen(Accent, 5) { LineJoin = PenLineJoin.Round, StartLineCap = PenLineCap.Round, EndLineCap = PenLineCap.Round });
 
         for (var i = 0; i + 1 < points.Length; i++)
         {
@@ -258,6 +259,59 @@ public sealed class RouteView : FrameworkElement
             dc.DrawText(line, new Point(x + 10, y));
             y += line.Height;
         }
+    }
+
+    /// <summary>
+    /// Moves every segment a few pixels to the right of its direction, like traffic lanes. A walk into an aisle and back
+    /// out, or along a cross aisle in both directions, then shows as two parallel lines instead of one.
+    /// </summary>
+    private static Point[] ToLanes(Point[] points, bool closed)
+    {
+        var p = points.Where((point, i) => i == 0 || (point - points[i - 1]).Length > 0.01).ToList();
+        if (closed && p.Count > 1 && (p[^1] - p[0]).Length <= 0.01)
+        {
+            p.RemoveAt(p.Count - 1);
+        }
+
+        var n = p.Count;
+        if (n < 2)
+        {
+            return points;
+        }
+
+        Vector Right(int i)
+        {
+            var direction = p[(i + 1) % n] - p[i];
+            direction.Normalize();
+            return new Vector(-direction.Y, direction.X);
+        }
+
+        var lanes = new List<Point>();
+        for (var i = 0; i < n; i++)
+        {
+            var hasIn = closed || i > 0;
+            var hasOut = closed || i < n - 1;
+            if (!hasIn || !hasOut)
+            {
+                lanes.Add(p[i] + Right(hasOut ? i : i - 1) * LaneOffset);
+                continue;
+            }
+
+            var inRight = Right((i - 1 + n) % n);
+            var outRight = Right(i);
+            var dot = inRight * outRight;
+            if (dot < -0.9)
+            {
+                // U-turn at a pick: leave the incoming lane and join the outgoing one.
+                lanes.Add(p[i] + inRight * LaneOffset);
+                lanes.Add(p[i] + outRight * LaneOffset);
+            }
+            else
+            {
+                lanes.Add(p[i] + (inRight + outRight) * (LaneOffset / (1 + dot)));
+            }
+        }
+        return [.. lanes];
     }
 
     private Point[] LegPoints(City from, IEnumerable<(double X, double Y)> walk) =>
