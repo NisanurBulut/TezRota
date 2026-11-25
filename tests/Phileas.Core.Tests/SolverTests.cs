@@ -101,6 +101,21 @@ public class SolverTests
         Assert.Equal(0.030, a.DistanceTo(c), precision: 9); // 30 m straight along the aisle
     }
 
+    [Fact]
+    public void Warehouse_walk_through_each_cross_aisle_and_the_shorter_one_is_chosen()
+    {
+        var a = new City(1, "A", Warehouse.Aisles[0], 465, InWarehouse: true);
+        var c = new City(3, "C", Warehouse.Aisles[2], 345, InWarehouse: true);
+
+        Assert.Equal(0.051, Warehouse.WalkDistance(a, c, Warehouse.Bottom), precision: 9); // 7.5 m + 24 m + 19.5 m
+        Assert.Equal(0.093, Warehouse.WalkDistance(a, c, Warehouse.Top), precision: 9); // 40.5 m + 24 m + 28.5 m
+        Assert.Equal(Warehouse.Bottom, Warehouse.ShorterCrossAisle(a, c));
+        Assert.Equal(0.051, a.DistanceTo(c), precision: 9);
+        Assert.Equal(
+            [(Warehouse.Aisles[0], Warehouse.Bottom), (Warehouse.Aisles[2], Warehouse.Bottom), (Warehouse.Aisles[2], 345.0)],
+            Warehouse.Walk(a, c).ToArray());
+    }
+
     [Theory]
     [MemberData(nameof(Solvers))]
     public void Warehouse_picking_route_is_shorter_than_the_random_start(IRouteSolver solver)

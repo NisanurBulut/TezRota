@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using Phileas.Core.Models;
 
@@ -9,6 +10,7 @@ namespace Phileas.Wpf.Controls;
 /// Draws the cities and the tour through them. While <see cref="IsActive"/> is true a stream of light dots
 /// runs along the route and the start city pulses, so a running search never looks frozen.
 /// Pick locations in a <see cref="Warehouse"/> are drawn between racks and the route follows the aisles.
+/// Hovering a pick shows the walk to it from the previous pick: metres per segment and the longer cross aisle, dashed.
 /// </summary>
 public sealed class RouteView : FrameworkElement
 {
@@ -18,6 +20,9 @@ public sealed class RouteView : FrameworkElement
     private static readonly Brush GridDot = new SolidColorBrush(Color.FromArgb(0x99, 0xBA, 0xC8, 0xD3));
     private static readonly Brush LabelBrush = new SolidColorBrush(Color.FromRgb(0x2A, 0x37, 0x44));
     private static readonly Brush RackFill = new SolidColorBrush(Color.FromRgb(0xD5, 0xDE, 0xE8));
+    private static readonly Brush MutedBrush = new SolidColorBrush(Color.FromRgb(0x6B, 0x78, 0x86));
+    private static readonly Pen AlternativePen = new(MutedBrush, 2) { DashStyle = new DashStyle([3, 2.5], 0), LineJoin = PenLineJoin.Round };
+    private static readonly Pen BoxBorder = new(new SolidColorBrush(Color.FromRgb(0xC9, 0xD3, 0xDD)), 1);
 
     public static readonly DependencyProperty CitiesProperty = DependencyProperty.Register(
         nameof(Cities), typeof(IReadOnlyList<City>), typeof(RouteView),
@@ -37,6 +42,10 @@ public sealed class RouteView : FrameworkElement
 
     private double _phase;
     private bool _animating;
+    private double _left;
+    private double _top;
+    private double _scale;
+    private int? _hovered;
 
     public RouteView() => ClipToBounds = true;
 
@@ -89,8 +98,45 @@ public sealed class RouteView : FrameworkElement
         InvalidateVisual();
     }
 
+    protected override void OnMouseMove(MouseEventArgs e)
+    {
+        var position = e.GetPosition(this);
+        int? nearest = null;
+        var best = 14.0;
+        if (Cities is { Count: > 0 } cities && cities[0].InWarehouse && _scale > 0)
+        {
+            for (var i = 0; i < cities.Count; i++)
+            {
+                var distance = (Screen(cities[i].X, cities[i].Y) - position).Length;
+                if (distance < best)
+                {
+                    best = distance;
+                    nearest = i;
+                }
+            }
+        }
+        SetHovered(nearest);
+    }
+
+    protected override void OnMouseLeave(MouseEventArgs e) => SetHovered(null);
+
+    private void SetHovered(int? index)
+    {
+        if (index != _hovered)
+        {
+            _hovered = index;
+            Cursor = index is null ? null : Cursors.Hand;
+            InvalidateVisual();
+        }
+    }
+
+    private Point Screen(double x, double y) => new(_left + x * _scale, _top + y * _scale);
+
     protected override void OnRender(DrawingContext dc)
     {
+        // A transparent background makes the whole area receive mouse moves, not only the drawn lines.
+        dc.DrawRectangle(Brushes.Transparent, null, new Rect(RenderSize));
+
         var scale = Math.Min((ActualWidth - 2 * Padding) / CityGenerator.Width, (ActualHeight - 2 * Padding) / CityGenerator.Height);
         if (Cities is not { Count: > 0 } cities || scale <= 0)
         {
@@ -99,6 +145,7 @@ public sealed class RouteView : FrameworkElement
 
         var left = (ActualWidth - CityGenerator.Width * scale) / 2;
         var top = (ActualHeight - CityGenerator.Height * scale) / 2;
+        (_left, _top, _scale) = (left, top, scale);
         Point ToScreen(City city) => new(left + city.X * scale, top + city.Y * scale);
 
         for (var x = 0; x <= CityGenerator.Width; x += 100)
@@ -129,12 +176,118 @@ public sealed class RouteView : FrameworkElement
             DrawRoute(dc, route.ToArray());
         }
 
+        var leg = inWarehouse ? HoveredLeg(cities) : null;
+        if (leg is { } walk)
+        {
+            DrawLeg(dc, walk.From, walk.To);
+        }
+
         var startCity = Order is { Length: > 0 } ? cities[Order[0]] : null;
         foreach (var city in cities)
         {
             DrawCity(dc, city, ToScreen(city), isStart: city == startCity);
         }
+
+        if (leg is { } hovered)
+        {
+            DrawLegInfo(dc, hovered.From, hovered.To);
+        }
+        else if (inWarehouse && Order is { Length: > 1 })
+        {
+            dc.DrawText(Text("Hover a pick to see how the picker walks there", 11, MutedBrush), Screen(60, 552));
+        }
     }
+
+    private (City From, City To)? HoveredLeg(IReadOnlyList<City> cities)
+    {
+        if (_hovered is not { } index || index >= cities.Count || Order is not { Length: > 1 } order)
+        {
+            return null;
+        }
+
+        var k = Array.IndexOf(order, index);
+        return k < 0 ? null : (cities[order[(k - 1 + order.Length) % order.Length]], cities[index]);
+    }
+
+    private void DrawLeg(DrawingContext dc, City from, City to)
+    {
+        var chosen = Warehouse.ShorterCrossAisle(from, to);
+        if (from.X != to.X)
+        {
+            DrawPolyline(dc, LegPoints(from, Warehouse.Walk(from, to, Warehouse.OtherCrossAisle(chosen))), AlternativePen);
+        }
+
+        var points = LegPoints(from, Warehouse.Walk(from, to, chosen));
+        DrawPolyline(dc, points, new Pen(Accent, 5) { LineJoin = PenLineJoin.Round, StartLineCap = PenLineCap.Round, EndLineCap = PenLineCap.Round });
+
+        for (var i = 0; i + 1 < points.Length; i++)
+        {
+            var units = (points[i + 1] - points[i]).Length / _scale;
+            if (units >= 1)
+            {
+                var middle = new Point((points[i].X + points[i + 1].X) / 2, (points[i].Y + points[i + 1].Y) / 2);
+                DrawPill(dc, Text(Metres(units * Warehouse.MetresPerUnit), 11, Accent), middle);
+            }
+        }
+    }
+
+    private void DrawLegInfo(DrawingContext dc, City from, City to)
+    {
+        var chosen = Warehouse.ShorterCrossAisle(from, to);
+        var metres = Metres(Warehouse.WalkDistance(from, to) * 1000);
+        var title = from.X == to.X
+            ? $"{from.Name} → {to.Name}: {metres} along the aisle"
+            : $"{from.Name} → {to.Name}: {metres} via the {AisleName(chosen)} cross aisle";
+        var lines = new List<FormattedText> { Text(title, 12, LabelBrush) };
+        if (from.X != to.X)
+        {
+            var other = Warehouse.OtherCrossAisle(chosen);
+            lines.Add(Text($"Via the {AisleName(other)}: {Metres(Warehouse.WalkDistance(from, to, other) * 1000)} (dashed)", 11, MutedBrush));
+        }
+
+        var width = lines.Max(l => l.Width) + 20;
+        var height = lines.Sum(l => l.Height) + 14;
+        var anchor = Screen(to.X, to.Y);
+        var x = Math.Clamp(anchor.X + 16, 4, Math.Max(4, ActualWidth - width - 4));
+        var y = Math.Clamp(anchor.Y + 16, 4, Math.Max(4, ActualHeight - height - 4));
+
+        dc.DrawRoundedRectangle(CityFill, BoxBorder, new Rect(x, y, width, height), 6, 6);
+        y += 7;
+        foreach (var line in lines)
+        {
+            dc.DrawText(line, new Point(x + 10, y));
+            y += line.Height;
+        }
+    }
+
+    private Point[] LegPoints(City from, IEnumerable<(double X, double Y)> walk) =>
+        [Screen(from.X, from.Y), .. walk.Select(p => Screen(p.X, p.Y))];
+
+    private static void DrawPolyline(DrawingContext dc, Point[] points, Pen pen)
+    {
+        var geometry = new StreamGeometry();
+        using (var context = geometry.Open())
+        {
+            context.BeginFigure(points[0], false, false);
+            context.PolyLineTo(points.Skip(1).ToArray(), true, true);
+        }
+        geometry.Freeze();
+        dc.DrawGeometry(null, pen, geometry);
+    }
+
+    private static void DrawPill(DrawingContext dc, FormattedText text, Point center)
+    {
+        var box = new Rect(center.X - text.Width / 2 - 5, center.Y - text.Height / 2 - 1, text.Width + 10, text.Height + 2);
+        dc.DrawRoundedRectangle(CityFill, BoxBorder, box, 8, 8);
+        dc.DrawText(text, new Point(box.X + 5, box.Y + 1));
+    }
+
+    private FormattedText Text(string text, double size, Brush brush) =>
+        new(text, CultureInfo.InvariantCulture, FlowDirection.LeftToRight, LabelFont, size, brush, VisualTreeHelper.GetDpi(this).PixelsPerDip);
+
+    private static string Metres(double metres) => metres.ToString("0.#", CultureInfo.InvariantCulture) + " m";
+
+    private static string AisleName(double crossAisle) => crossAisle == Warehouse.Top ? "top" : "bottom";
 
     private void DrawRoute(DrawingContext dc, Point[] points)
     {
@@ -200,10 +353,7 @@ public sealed class RouteView : FrameworkElement
             dc.DrawEllipse(CityFill, new Pen(Accent, 2), center, 5, 5);
         }
 
-        var label = new FormattedText(
-            city.Name, CultureInfo.InvariantCulture, FlowDirection.LeftToRight, LabelFont, 11, LabelBrush,
-            VisualTreeHelper.GetDpi(this).PixelsPerDip);
-        dc.DrawText(label, new Point(center.X + 8, center.Y - 20));
+        dc.DrawText(Text(city.Name, 11, LabelBrush), new Point(center.X + 8, center.Y - 20));
     }
 
     private static Brush WithOpacity(Brush brush, double opacity) =>

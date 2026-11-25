@@ -10,7 +10,8 @@ public static class Warehouse
     public const double Top = 60;
     public const double Bottom = 540;
     public const double RackWidth = 40;
-    private const double KmPerUnit = 0.0001;
+    public const double MetresPerUnit = 0.1;
+    private const double KmPerUnit = MetresPerUnit / 1000;
 
     public static readonly double[] Aisles = [80, 200, 320, 440, 560, 680, 800, 920];
 
@@ -29,20 +30,29 @@ public static class Warehouse
     }
 
     /// <summary>Walking distance in km: straight along the same aisle, otherwise through the shorter cross aisle.</summary>
-    public static double WalkDistance(City from, City to)
+    public static double WalkDistance(City from, City to) => WalkDistance(from, to, ShorterCrossAisle(from, to));
+
+    /// <summary>Walking distance in km through the given cross aisle (<see cref="Top"/> or <see cref="Bottom"/>).</summary>
+    public static double WalkDistance(City from, City to, double crossAisle)
     {
         var units = from.X == to.X
             ? Math.Abs(from.Y - to.Y)
-            : Math.Abs(from.X - to.X) + Math.Min(from.Y + to.Y - 2 * Top, 2 * Bottom - from.Y - to.Y);
+            : Math.Abs(from.Y - crossAisle) + Math.Abs(from.X - to.X) + Math.Abs(to.Y - crossAisle);
         return units * KmPerUnit;
     }
 
+    public static double ShorterCrossAisle(City from, City to) =>
+        from.Y + to.Y - 2 * Top < 2 * Bottom - from.Y - to.Y ? Top : Bottom;
+
+    public static double OtherCrossAisle(double crossAisle) => crossAisle == Top ? Bottom : Top;
+
     /// <summary>The corners of the walk to <paramref name="to"/>, ending at <paramref name="to"/>; used for drawing.</summary>
-    public static IEnumerable<(double X, double Y)> Walk(City from, City to)
+    public static IEnumerable<(double X, double Y)> Walk(City from, City to) => Walk(from, to, ShorterCrossAisle(from, to));
+
+    public static IEnumerable<(double X, double Y)> Walk(City from, City to, double crossAisle)
     {
         if (from.X != to.X)
         {
-            var crossAisle = from.Y + to.Y - 2 * Top < 2 * Bottom - from.Y - to.Y ? Top : Bottom;
             yield return (from.X, crossAisle);
             yield return (to.X, crossAisle);
         }
