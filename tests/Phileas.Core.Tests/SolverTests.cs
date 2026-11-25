@@ -89,4 +89,27 @@ public class SolverTests
         Assert.Equal(40, Tour.Distance(square, [0, 1, 2, 3]), precision: 6);
         Assert.Equal("A→B→C→D→A", Tour.Describe(square, [0, 1, 2, 3]));
     }
+
+    [Fact]
+    public void Warehouse_walk_goes_along_the_aisle_or_through_the_shorter_cross_aisle()
+    {
+        var a = new City(1, "A", Warehouse.Aisles[0], Warehouse.Top + 45, InWarehouse: true);
+        var b = new City(2, "B", Warehouse.Aisles[1], Warehouse.Top + 45, InWarehouse: true);
+        var c = new City(3, "C", Warehouse.Aisles[0], Warehouse.Top + 345, InWarehouse: true);
+
+        Assert.Equal(0.021, a.DistanceTo(b), precision: 9); // 4.5 m up + 12 m across + 4.5 m down
+        Assert.Equal(0.030, a.DistanceTo(c), precision: 9); // 30 m straight along the aisle
+    }
+
+    [Theory]
+    [MemberData(nameof(Solvers))]
+    public void Warehouse_picking_route_is_shorter_than_the_random_start(IRouteSolver solver)
+    {
+        var picks = Warehouse.Create(15, seed: 1);
+
+        var result = solver.Solve(picks, Tour.RandomOrder(picks.Count, new Random(2)));
+
+        Assert.True(result.Distance < result.StartDistance);
+        Assert.Equal(Enumerable.Range(0, picks.Count), result.Order.Order());
+    }
 }
