@@ -76,8 +76,9 @@
                         <Border Style="{StaticResource Card}" Margin="0,0,0,10">
                             <StackPanel>
                                 <TextBlock Text="Problem" Style="{StaticResource CardTitle}" Margin="0,0,0,8" />
+                                <CheckBox Content="Warehouse picking" IsChecked="{Binding IsWarehouse}" Command="{Binding GenerateCitiesCommand}" Margin="0,0,0,10" />
                                 <c:LabeledSlider Header="Cities" Value="{Binding CityCount}" Minimum="5" Maximum="60" Step="1" Accent="{StaticResource PrimaryBrush}" />
-                                <c:LabeledSlider Header="Speed" Value="{Binding SpeedKmPerHour}" Minimum="20" Maximum="120" Step="5" Format="0 &quot;km/h&quot;" Accent="{StaticResource PrimaryBrush}" />
+                                <c:LabeledSlider Header="Speed" Value="{Binding SpeedKmPerHour}" Minimum="5" Maximum="120" Step="5" Format="0 &quot;km/h&quot;" Accent="{StaticResource PrimaryBrush}" />
                                 <c:LabeledSlider Header="Animation" Value="{Binding AnimationSeconds}" Minimum="1" Maximum="10" Step="0.5" Format="0.0 &quot;s&quot;" Accent="{StaticResource PrimaryBrush}" />
                                 <Button Padding="14,8" AutomationProperties.Name="New cities" Command="{Binding GenerateCitiesCommand}" Style="{StaticResource ActionButton}">
                                     <StackPanel Orientation="Horizontal">

@@ -39,6 +39,10 @@ public sealed partial class MainViewModel : ObservableObject
     [ObservableProperty]
     public partial int CityCount { get; set; }
 
+    /// <summary>Warehouse picking: pick locations in a warehouse instead of cities on a map.</summary>
+    [ObservableProperty]
+    public partial bool IsWarehouse { get; set; }
+
     [ObservableProperty]
     public partial double SpeedKmPerHour { get; set; }
 
@@ -59,7 +63,7 @@ public sealed partial class MainViewModel : ObservableObject
     [RelayCommand(CanExecute = nameof(CanStart))]
     private void GenerateCities()
     {
-        Cities = CityGenerator.Create(CityCount);
+        Cities = IsWarehouse ? Warehouse.Create(CityCount) : CityGenerator.Create(CityCount);
         _startOrder = Tour.RandomOrder(Cities.Count, Random.Shared);
 
         Annealing.Reset(Cities, _startOrder);
